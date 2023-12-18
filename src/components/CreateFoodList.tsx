@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import RecommendRecipe from "./RecommendRecipe";
 import { RecipeStats } from "@/types/Recipe";
 
 const fetchRecipes = async (foodItems: string[]): Promise<RecipeStats[]> => {
@@ -57,42 +56,72 @@ export default function CreateFoodList() {
     setRecommendedRecipes(recommendedRecipes);
   };
 
+  const handleRemoveItemClick = (index: number) => {
+    const newFoodList = [...foodList];
+
+    if (index >= 0 && index < foodList.length) {
+      newFoodList.splice(index, 1);
+    }
+
+    setFoodList(newFoodList);
+  };
+
   return (
     <div className="flex flex-col gap-5 place-items-center">
       {recommendedRecipes.length > 0 && (
         <div>{recommendedRecipes.toString()}</div>
       )}
 
-      <RecommendRecipe
-        items={foodList}
+      <button
+        className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
+        disabled={foodList.length === 0}
         onClick={() => handleGenerateRecipeClick()}
-      />
+      >
+        Get Recipe
+      </button>
 
       {error && <span className="text-red-500 text-sm">{error}</span>}
 
-      <form className="flex" onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          value={foodItem}
-          className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-blue-500 text-gray-800"
-          onChange={(e) => setFoodItem(e.target.value)}
-          placeholder="Enter item"
-        />
-        <button
-          className="rounded rounded-l-none transition-colors bg-green-600 enabled:hover:bg-green-700 disabled:opacity-75 px-6 py-2"
-          disabled={!foodItem.trim()}
-          type="submit"
-        >
-          Add
-        </button>
-      </form>
+      <div className="relative">
+        <form className="flex" onSubmit={handleFormSubmit}>
+          <input
+            type="text"
+            value={foodItem}
+            className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-blue-500 text-gray-800"
+            onChange={(e) => setFoodItem(e.target.value)}
+            placeholder="Enter item"
+          />
+          <button
+            className="rounded rounded-l-none transition-all bg-green-600 enabled:hover:bg-green-700 disabled:opacity-75 px-4 py-2"
+            disabled={!foodItem.trim()}
+            type="submit"
+          >
+            Add
+          </button>
+        </form>
 
-      <h3 className="font-bold">Food List</h3>
-      <ul>
-        {foodList.map((item) => {
-          return <li key={item}>{item}</li>;
-        })}
-      </ul>
+        {foodList.length > 0 && (
+          <ul className="absolute w-full p-6 rounded-b">
+            {foodList.map((item, index) => {
+              return (
+                <li
+                  key={item}
+                  className="flex items-center justify-between gap-2"
+                >
+                  <span>{item}</span>
+                  <span
+                    role="button"
+                    className="text-xl text-red-500"
+                    onClick={() => handleRemoveItemClick(index)}
+                  >
+                    &times;
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
