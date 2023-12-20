@@ -17,7 +17,7 @@ export async function POST(req: Request) {
       {
         role: "system",
         content:
-          "You will be provided with a list of food items, and your task is to recommend 3 recipes using them. Respond with a recipe name, difficulty, prep time, cook time, and how many it serves. Provide your answer in JSON structure, where each each is an array item such as {'title': '<Name of recipe>', 'difficulty': '<Number between 1 and 10>', 'prepTime': '<Time in minutes>', 'cookTime': '<Time in minutes>', 'portions': '<Number of portions the recipe is for>'}",
+          "You will be provided with a list of food items, and your task is to recommend 3 recipes using them. Respond with a recipe name, difficulty, prep time, cook time, and how many it serves. Provide your answer in JSON structure, where each item is structured as {'title': '<Name of recipe>', 'difficulty': '<Number between 1 and 10>', 'prepTime': '<Time in minutes>', 'cookTime': '<Time in minutes>', 'portions': '<Number of portions the recipe is for>'} inside a 'recipes' property.",
       },
       {
         role: "user",

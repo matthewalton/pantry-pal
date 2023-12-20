@@ -17,7 +17,7 @@ export const fetchRecipes = async (
     }
 
     const data = await res.json();
-    return data;
+    return JSON.parse(data).recipes;
   } catch (error) {
     console.error("Error fetching recipe:", error);
     throw new Error("Failed to fetch recipe");

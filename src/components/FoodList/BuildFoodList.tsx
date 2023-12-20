@@ -41,9 +41,9 @@ export default function BuildFoodList({ handleGenerateRecipeClick }: Props) {
         className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
         disabled={foodList.length === 0}
         onClick={() => handleGenerateRecipeClick(foodList)}
-        aria-label="Get Recipe"
+        aria-label="Find Recipe"
       >
-        Get Recipe
+        Find Recipe
       </button>
 
       {error && <span className="text-red-500 text-sm">{error}</span>}
