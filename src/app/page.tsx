@@ -3,7 +3,7 @@ import RecommendRecipes from "@/components/RecommendRecipes";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="relative z-10 flex place-items-center">
+      <div className="relative z-10 flex justify-center place-items-center">
         <div className="absolute h-[300px] w-[480px] -translate-x-1/2 rounded-full bg-gradient-radial from-white to-transparent blur-2xl content-[''] dark:bg-gradient-to-br dark:from-transparent dark:to-green-700 dark:opacity-10 lg:h-[360px] z-10"></div>
 
         <div className="relative z-20">

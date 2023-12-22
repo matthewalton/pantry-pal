@@ -33,10 +33,10 @@ export default function GenerateRecipes({ foodList }: Props) {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-5">
       {recommendedRecipes?.map((recipe, index) => (
         <RecommendedRecipe key={index} recipeStats={recipe} />
       ))}
-    </>
+    </div>
   );
 }
