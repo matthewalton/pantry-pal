@@ -9,19 +9,26 @@ type Props = {
 
 export default function GenerateRecipes({ foodList }: Props) {
   const [recommendedRecipes, setRecommendedRecipes] = useState<RecipeStats[]>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (foodList.length > 0) {
-        const recipes = await fetchRecipes(foodList);
-        setRecommendedRecipes(recipes);
+      try {
+        setLoading(true);
+
+        if (foodList.length > 0) {
+          const recipes = await fetchRecipes(foodList);
+          setRecommendedRecipes(recipes);
+        }
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [foodList]);
 
-  if (!recommendedRecipes) {
+  if (loading) {
     return <h2>Finding recipes...</h2>;
   }
 
