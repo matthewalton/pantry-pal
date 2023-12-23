@@ -3,6 +3,7 @@ import { RecipeStats } from "@/types/Recipe";
 import { cookies } from "next/headers";
 import { getRecipe } from "@/services/api";
 import { Suspense } from "react";
+import Link from "next/link";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
@@ -31,6 +32,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex flex-col gap-5">
+      <Link
+        href="/"
+        className="transition-colors rounded bg-gray-600 hover:bg-gray-700 py-2 px-4 me-auto"
+      >
+        Back
+      </Link>
+
       <RecipeStatsCard recipeStats={recipeStats} showLink={false} />
 
       <Suspense fallback={<div>Loading...</div>}>
