@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 export const runtime = "edge";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const { foodItems } = await req.json();
 
   const response = await openai.chat.completions.create({

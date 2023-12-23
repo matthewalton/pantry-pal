@@ -1,5 +1,6 @@
 interface Recipe {
   title: string;
+  slug: string;
 }
 
 interface Stats {

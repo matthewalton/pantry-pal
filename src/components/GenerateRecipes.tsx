@@ -1,7 +1,7 @@
-import { fetchRecipes } from "@/app/services/api";
+import { fetchRecipes } from "@/services/api";
 import { RecipeStats } from "@/types/Recipe";
 import { useEffect, useState } from "react";
-import RecommendedRecipe from "./Recipe/RecommendedRecipe";
+import RecipeStatsCard from "./Recipe/RecipeStatsCard";
 
 type Props = {
   foodList: string[];
@@ -35,7 +35,7 @@ export default function GenerateRecipes({ foodList }: Props) {
   return (
     <div className="flex flex-col gap-5">
       {recommendedRecipes?.map((recipe, index) => (
-        <RecommendedRecipe key={index} recipeStats={recipe} />
+        <RecipeStatsCard key={index} recipeStats={recipe} showLink={true} />
       ))}
     </div>
   );
