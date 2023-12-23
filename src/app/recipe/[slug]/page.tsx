@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     recipeStats.portions
   );
 
-  const recipe = await Promise.resolve(recipeData);
+  const recipe = Promise.resolve(recipeData);
 
   return (
     <div className="flex flex-col gap-5">
