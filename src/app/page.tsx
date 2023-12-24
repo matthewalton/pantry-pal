@@ -1,19 +1,16 @@
-"use client";
-
 import BuildFoodList from "@/components/FoodList/BuildFoodList";
-import GenerateRecipes from "@/components/GenerateRecipes";
-import { useState } from "react";
+import { cookies } from "next/headers";
 
 export default function Home() {
-  const [activeFoodList, setActiveFoodList] = useState<string[]>([]);
+  const handleSetCookie = async (foodList: string[]) => {
+    "use server";
+
+    cookies().set("foodItems", JSON.stringify(foodList));
+  };
 
   return (
     <div className="flex flex-col gap-5 place-items-center">
-      {activeFoodList.length === 0 && (
-        <BuildFoodList handleGenerateRecipeClick={setActiveFoodList} />
-      )}
-
-      <GenerateRecipes foodList={activeFoodList} />
+      <BuildFoodList setCookieHandler={handleSetCookie} />
     </div>
   );
 }

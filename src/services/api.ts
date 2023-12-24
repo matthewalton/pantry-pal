@@ -1,5 +1,3 @@
-"use server";
-
 import { RecipeStats } from "@/types/Recipe";
 import { slugify } from "./str";
 import { cookies } from "next/headers";
@@ -20,7 +18,6 @@ export const getRecipe = async (
     );
 
     const data = await res.json();
-    console.log(data);
 
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -67,7 +64,7 @@ export const fetchRecipes = async (
 };
 
 /**
- * Return dummy recipe details for testing.
+ * Return dummy recipe deta for testing.
  *
  * @returns array
  */
@@ -88,37 +85,34 @@ function getDummyRecipeDetails(): Promise<string> {
  */
 function getDummyRecipes(): Promise<RecipeStats[]> {
   return new Promise((resolve) => {
-    const recipes = [
-      {
-        title: "Dummy Recipe 1",
-        slug: "dummy-recipe-1",
-        difficulty: 5,
-        prepTime: 20,
-        cookTime: 30,
-        portions: 4,
-      },
-      {
-        title: "Dummy Recipe 2",
-        slug: "dummy-recipe-2",
-        difficulty: 3,
-        prepTime: 15,
-        cookTime: 25,
-        portions: 2,
-      },
-      {
-        title: "Dummy Recipe 3",
-        slug: "dummy-recipe-3",
-        difficulty: 7,
-        prepTime: 25,
-        cookTime: 40,
-        portions: 6,
-      },
-    ];
-
-    cookies().set("recipes", JSON.stringify(recipes));
-
     setTimeout(() => {
-      cookies().set("recipes", JSON.stringify(recipes));
+      const recipes = [
+        {
+          title: "Dummy Recipe 1",
+          slug: "dummy-recipe-1",
+          difficulty: 5,
+          prepTime: 20,
+          cookTime: 30,
+          portions: 4,
+        },
+        {
+          title: "Dummy Recipe 2",
+          slug: "dummy-recipe-2",
+          difficulty: 3,
+          prepTime: 15,
+          cookTime: 25,
+          portions: 2,
+        },
+        {
+          title: "Dummy Recipe 3",
+          slug: "dummy-recipe-3",
+          difficulty: 7,
+          prepTime: 25,
+          cookTime: 40,
+          portions: 6,
+        },
+      ];
+
       resolve(recipes);
     }, 2000);
   });

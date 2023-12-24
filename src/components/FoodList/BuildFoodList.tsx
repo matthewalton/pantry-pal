@@ -1,13 +1,17 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type Props = {
-  handleGenerateRecipeClick: (foodList: string[]) => void;
+  setCookieHandler: (foodList: string[]) => void;
 };
 
-export default function BuildFoodList({ handleGenerateRecipeClick }: Props) {
+export default function BuildFoodList({ setCookieHandler }: Props) {
   const [foodList, setFoodList] = useState<string[]>([]);
   const [foodItem, setFoodItem] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const router = useRouter();
 
   const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,12 +39,17 @@ export default function BuildFoodList({ handleGenerateRecipeClick }: Props) {
     setFoodList(newFoodList);
   };
 
+  const handleFindRecipeClick = () => {
+    setCookieHandler(foodList);
+    router.push("recommended-recipes");
+  };
+
   return (
     <>
       <button
         className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
         disabled={foodList.length === 0}
-        onClick={() => handleGenerateRecipeClick(foodList)}
+        onClick={() => handleFindRecipeClick()}
         aria-label="Find Recipe"
       >
         Find Recipe
