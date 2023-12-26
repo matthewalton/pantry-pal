@@ -1,3 +1,4 @@
+import { slugify } from "@/services/str";
 import { RecipeStats } from "@/types/Recipe";
 import Link from "next/link";
 
@@ -7,7 +8,7 @@ type Props = {
 };
 
 export default function RecipeStatsCard({ recipeStats, showLink }: Props) {
-  const { title, slug, difficulty, prepTime, cookTime, portions } = recipeStats;
+  const { title, difficulty, prepTime, cookTime, portions } = recipeStats;
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden w-96">
@@ -35,7 +36,7 @@ export default function RecipeStatsCard({ recipeStats, showLink }: Props) {
 
         {showLink && (
           <Link
-            href={`recipe/${slug}`}
+            href={`recipe/${slugify(title)}`}
             className="transition-colors rounded w-100 bg-green-600 hover:bg-green-700 p-2 text-center"
           >
             View Recipe

@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { getRecipe } from "@/services/api";
 import { Suspense } from "react";
 import Link from "next/link";
+import { slugify } from "@/services/str";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
@@ -16,7 +17,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
     throw new Error("No recipes found in cookie store.");
   }
 
-  const recipeStats = allRecipes.find((recipe) => recipe.slug === slug);
+  const recipeStats = allRecipes.find(
+    (recipe) => slugify(recipe.title) === slug
+  );
 
   if (!recipeStats) {
     throw new Error(`Could not find recipe with slug: ${slug}`);

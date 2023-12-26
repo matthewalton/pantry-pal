@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import { fetchRecipes } from "@/services/api";
-import { RecipeStats } from "@/types/Recipe";
 import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
 import Link from "next/link";
 
@@ -13,9 +12,7 @@ export default async function Page() {
     throw new Error("No food items found.");
   }
 
-  const recipesData = fetchRecipes(foodList);
-
-  const recipes = await Promise.resolve<RecipeStats[]>(recipesData);
+  const recipes = await fetchRecipes(foodList);
 
   return (
     <div className="flex flex-col gap-5">
