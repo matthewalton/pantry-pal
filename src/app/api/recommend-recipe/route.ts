@@ -8,8 +8,9 @@ const openai = new OpenAI({
 
 export const runtime = "edge";
 
-export async function POST(req: NextRequest) {
-  const { foodItems } = await req.json();
+export async function GET(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
+  const foodItems = searchParams.get("foodItems");
 
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest) {
       },
       {
         role: "user",
-        content: foodItems.join(", "),
+        content: foodItems,
       },
     ],
     temperature: 0.7,

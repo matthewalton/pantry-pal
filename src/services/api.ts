@@ -30,13 +30,17 @@ export const fetchRecipes = async (
   foodItems: string[]
 ): Promise<RecipeStats[]> => {
   try {
-    const res = await fetch(`${process.env.URL}/api/recommend-recipe`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ foodItems }),
-    });
+    const foodItemsQueryParam = foodItems.join(",");
+
+    const res = await fetch(
+      `${process.env.URL}/api/recommend-recipe?foodItems=${foodItemsQueryParam}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch data");
