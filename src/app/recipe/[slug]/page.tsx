@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <div className="flex flex-col gap-5">
       <Link
-        href="/"
+        href="/recommended-recipes"
         className="transition-colors rounded bg-gray-600 hover:bg-gray-700 py-2 px-4 me-auto"
       >
         Back
