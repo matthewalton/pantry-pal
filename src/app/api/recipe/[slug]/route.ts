@@ -1,7 +1,5 @@
 import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse, streamToResponse } from "ai";
-import { RecipeStats } from "@/types/Recipe";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -48,5 +46,5 @@ export async function GET(
     ],
   });
 
-  return NextResponse.json(response.choices[0].message.content);
+  return Response.json(response.choices[0].message.content);
 }

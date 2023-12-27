@@ -1,6 +1,6 @@
-import { slugify } from "@/services/str";
 import { RecipeStats } from "@/types/Recipe";
-import Link from "next/link";
+import ViewRecipeButton from "../Buttons/ViewRecipeButton";
+import { cookies } from "next/headers";
 
 type Props = {
   recipeStats: RecipeStats;
@@ -9,6 +9,12 @@ type Props = {
 
 export default function RecipeStatsCard({ recipeStats, showLink }: Props) {
   const { title, difficulty, prepTime, cookTime, portions } = recipeStats;
+
+  const handleSetCookie = async (stats: RecipeStats) => {
+    "use server";
+
+    cookies().set("recipeStats", JSON.stringify(stats));
+  };
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden w-96">
@@ -35,12 +41,10 @@ export default function RecipeStatsCard({ recipeStats, showLink }: Props) {
         </div>
 
         {showLink && (
-          <Link
-            href={`recipe/${slugify(title)}`}
-            className="transition-colors rounded w-100 bg-green-600 hover:bg-green-700 p-2 text-center"
-          >
-            View Recipe
-          </Link>
+          <ViewRecipeButton
+            recipeStats={recipeStats}
+            setCookieHandler={handleSetCookie}
+          />
         )}
       </div>
     </div>

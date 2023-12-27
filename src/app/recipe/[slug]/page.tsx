@@ -4,22 +4,13 @@ import { cookies } from "next/headers";
 import { getRecipe } from "@/services/api";
 import { Suspense } from "react";
 import Link from "next/link";
-import { slugify } from "@/services/str";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
 
-  const allRecipes = JSON.parse(
-    cookies().get("recipes")?.value ?? "[]"
-  ) as RecipeStats[];
-
-  if (allRecipes?.length === 0) {
-    throw new Error("No recipes found in cookie store.");
-  }
-
-  const recipeStats = allRecipes.find(
-    (recipe) => slugify(recipe.title) === slug
-  );
+  const recipeStats = JSON.parse(
+    cookies().get("recipeStats")?.value ?? ""
+  ) as RecipeStats;
 
   if (!recipeStats) {
     throw new Error(`Could not find recipe with slug: ${slug}`);

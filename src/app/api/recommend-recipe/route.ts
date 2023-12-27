@@ -1,6 +1,5 @@
 import OpenAI from "openai";
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextRequest } from "next/server";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -29,11 +28,5 @@ export async function GET(req: NextRequest) {
     temperature: 0.7,
   });
 
-  const content = JSON.parse(response.choices[0].message.content ?? "");
-
-  if (content) {
-    cookies().set("recipes", content.recipes);
-  }
-
-  return NextResponse.json(content);
+  return Response.json(JSON.parse(response.choices[0].message.content ?? ""));
 }
