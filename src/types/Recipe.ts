@@ -9,6 +9,12 @@ interface Stats {
   portions: number;
 }
 
-type RecipeStats = Recipe & Stats;
+interface Details {
+  ingredients: string[];
+  instructions: string[];
+}
 
-export type { Recipe, RecipeStats };
+type RecipeStats = Recipe & Stats;
+type RecipeDetails = Recipe & Details;
+
+export type { Recipe, RecipeStats, RecipeDetails };

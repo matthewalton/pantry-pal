@@ -1,10 +1,10 @@
-import { RecipeStats } from "@/types/Recipe";
+import { RecipeDetails, RecipeStats } from "@/types/Recipe";
 
 export const getRecipe = async (
   title: string,
   difficulty: number,
   portions: number
-) => {
+): Promise<RecipeDetails> => {
   try {
     const encodedTitle = encodeURIComponent(title);
 
@@ -21,7 +21,7 @@ export const getRecipe = async (
 
     const data = await res.json();
 
-    return data;
+    return data.recipe;
   } catch (error) {
     console.error("Error fetching recipe:", error);
     throw new Error("Failed to fetch recipe");

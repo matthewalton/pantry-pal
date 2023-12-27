@@ -18,12 +18,13 @@ export async function GET(
   const portions = searchParams.get("portions");
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    temperature: 0.7,
+    model: "gpt-3.5-turbo-1106",
+    response_format: { type: "json_object" },
     messages: [
       {
         role: "system",
-        content: "You are a helpful assistant that provides a recipe.",
+        content:
+          "You are a helpful assistant that provides a recipe. The recipe details must include the list of ingredients and the instructions. Provide your answer in JSON structure, with an 'ingredients' property and an 'instructions' property, nested inside of an item called 'recipe'. The ingredients must be an array of strings. The instructions must be an array of strings.",
       },
       { role: "user", content: `Create a recipe for ${title}.` },
       {
@@ -41,11 +42,11 @@ export async function GET(
       {
         role: "user",
         content:
-          "Provide the list of ingredients and steps to make the recipe.",
+          "Provide the list of ingredients and instructions to make the recipe.",
       },
     ],
-    max_tokens: 1,
+    temperature: 0.7,
   });
 
-  return Response.json(response.choices[0].message.content);
+  return Response.json(JSON.parse(response.choices[0].message.content ?? ""));
 }

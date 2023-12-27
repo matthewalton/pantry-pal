@@ -2,8 +2,8 @@ import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
 import { RecipeStats } from "@/types/Recipe";
 import { cookies } from "next/headers";
 import { getRecipe } from "@/services/api";
-import { Suspense } from "react";
 import Link from "next/link";
+import RecipeDetailsCard from "@/components/Recipe/RecipeDetailsCard";
 
 export default async function Page({ params }: { params: { title: string } }) {
   const title = decodeURIComponent(params.title);
@@ -16,13 +16,11 @@ export default async function Page({ params }: { params: { title: string } }) {
     throw new Error(`Could not find recipe: ${title}`);
   }
 
-  const recipeData = getRecipe(
+  const recipeDetails = await getRecipe(
     title,
     recipeStats.difficulty,
     recipeStats.portions
   );
-
-  const recipe = Promise.resolve<string>(recipeData);
 
   return (
     <div className="flex flex-col gap-5">
@@ -35,9 +33,10 @@ export default async function Page({ params }: { params: { title: string } }) {
 
       <RecipeStatsCard recipeStats={recipeStats} showLink={false} />
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <div>{recipe}</div>
-      </Suspense>
+      <RecipeDetailsCard
+        ingredients={recipeDetails.ingredients}
+        instructions={recipeDetails.instructions}
+      />
     </div>
   );
 }
