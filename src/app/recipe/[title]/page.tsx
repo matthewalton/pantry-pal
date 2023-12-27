@@ -5,19 +5,19 @@ import { getRecipe } from "@/services/api";
 import { Suspense } from "react";
 import Link from "next/link";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
+export default async function Page({ params }: { params: { title: string } }) {
+  const title = decodeURIComponent(params.title);
 
   const recipeStats = JSON.parse(
     cookies().get("recipeStats")?.value ?? ""
   ) as RecipeStats;
 
   if (!recipeStats) {
-    throw new Error(`Could not find recipe with slug: ${slug}`);
+    throw new Error(`Could not find recipe: ${title}`);
   }
 
   const recipeData = getRecipe(
-    slug,
+    title,
     recipeStats.difficulty,
     recipeStats.portions
   );

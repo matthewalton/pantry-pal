@@ -1,6 +1,5 @@
 "use client";
 
-import { slugify } from "@/services/str";
 import { RecipeStats } from "@/types/Recipe";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +16,7 @@ export default function ViewRecipeButton({
 
   const handleViewRecipe = (stats: RecipeStats) => {
     setCookieHandler(stats);
-    router.push(`recipe/${slugify(stats.title)}`);
+    router.push(`recipe/${encodeURIComponent(stats.title)}`);
   };
 
   return (

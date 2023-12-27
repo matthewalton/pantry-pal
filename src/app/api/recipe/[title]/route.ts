@@ -9,9 +9,9 @@ export const runtime = "edge";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: { title: string } }
 ) {
-  const slug = params.slug;
+  const title = decodeURIComponent(params.title);
 
   const searchParams = req.nextUrl.searchParams;
   const difficulty = searchParams.get("difficulty");
@@ -25,7 +25,7 @@ export async function GET(
         role: "system",
         content: "You are a helpful assistant that provides a recipe.",
       },
-      { role: "user", content: `Create a recipe for ${slug}.` },
+      { role: "user", content: `Create a recipe for ${title}.` },
       {
         role: "assistant",
         content: "The recipe should have the following details:",
@@ -44,6 +44,7 @@ export async function GET(
           "Provide the list of ingredients and steps to make the recipe.",
       },
     ],
+    max_tokens: 1,
   });
 
   return Response.json(response.choices[0].message.content);

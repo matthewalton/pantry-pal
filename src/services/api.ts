@@ -1,13 +1,15 @@
 import { RecipeStats } from "@/types/Recipe";
 
 export const getRecipe = async (
-  slug: string,
+  title: string,
   difficulty: number,
   portions: number
 ) => {
   try {
+    const encodedTitle = encodeURIComponent(title);
+
     const res = await fetch(
-      `${process.env.URL}/api/recipe/${slug}?difficulty=${difficulty}&portions=${portions}`,
+      `${process.env.URL}/api/recipe/${encodedTitle}?difficulty=${difficulty}&portions=${portions}`,
       {
         method: "GET",
       }
