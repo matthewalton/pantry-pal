@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     cookies().get("recipes")?.value ?? "[]"
   ) as RecipeStats[];
 
-  if (!allRecipes) {
+  if (allRecipes?.length === 0) {
     throw new Error("No recipes found in cookie store.");
   }
 

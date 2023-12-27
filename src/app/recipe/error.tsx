@@ -25,7 +25,7 @@ export default function Error({
       >
         Try again
       </button>
-      <Link href="/">Go Back</Link>
+      <Link href="/recommended-recipes">Go Back</Link>
     </div>
   );
 }
