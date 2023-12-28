@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FoodListItemInput from "./FoodListItemInput";
+import FoodListItemList from "./FoodListItemList";
 
 type Props = {
   setCookieHandler: (foodList: string[]) => void;
@@ -57,28 +58,10 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
       <div className="relative">
         <FoodListItemInput handleAddItemToList={handleAddItemToList} />
 
-        {foodList.length > 0 && (
-          <ul className="absolute w-full p-6 rounded-b">
-            {foodList.map((item, index) => {
-              return (
-                <li
-                  key={item}
-                  className="flex items-center justify-between gap-2"
-                >
-                  <span>{item}</span>
-                  <span
-                    role="button"
-                    className="text-xl text-red-500"
-                    onClick={() => handleRemoveItemClick(index)}
-                    aria-label="Remove Food Item"
-                  >
-                    &times;
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        <FoodListItemList
+          foodList={foodList}
+          handleRemoveItemFromList={handleRemoveItemClick}
+        />
       </div>
     </>
   );
