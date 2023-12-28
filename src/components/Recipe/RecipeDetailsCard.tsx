@@ -15,7 +15,7 @@ export default function RecipeDetailsCard({
         ))}
       </ul>
 
-      <ol>
+      <ol className="list-decimal gap-2">
         {instructions.map((instruction) => (
           <li key={instruction}>{instruction}</li>
         ))}
