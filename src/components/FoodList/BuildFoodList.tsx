@@ -5,6 +5,7 @@ import { useState } from "react";
 import FoodListItemInput from "./FoodListItemInput";
 import FoodListItemList from "./FoodListItemList";
 import FindRecipeButton from "../Buttons/FindRecipeButton";
+import FoodListDifficultyInput from "./FoodListDifficultyInput";
 
 type Props = {
   setCookieHandler: (foodList: string[]) => void;
@@ -15,7 +16,16 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
   const [error, setError] = useState<string>("");
   const router = useRouter();
 
-  const handleAddItemToList = (foodItem: string) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formElements = event.currentTarget.elements;
+
+    const foodItemInput = formElements.namedItem(
+      "foodInput"
+    ) as HTMLInputElement;
+    const foodItem = foodItemInput.value.trim();
+
     const capitalizedFoodItem =
       foodItem.charAt(0).toUpperCase() + foodItem.slice(1);
 
@@ -50,16 +60,20 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
         handleButtonClick={handleFindRecipeClick}
       />
 
-      {error && <span className="text-red-500 text-sm">{error}</span>}
+      <form className="flex flex-col gap-5" onSubmit={handleFormSubmit}>
+        <FoodListDifficultyInput />
 
-      <div className="relative">
-        <FoodListItemInput handleAddItemToList={handleAddItemToList} />
+        {error && <span className="text-red-500 text-sm">{error}</span>}
 
-        <FoodListItemList
-          foodList={foodList}
-          handleRemoveItemFromList={handleRemoveItemClick}
-        />
-      </div>
+        <div className="relative">
+          <FoodListItemInput />
+
+          <FoodListItemList
+            foodList={foodList}
+            handleRemoveItemFromList={handleRemoveItemClick}
+          />
+        </div>
+      </form>
     </>
   );
 }
