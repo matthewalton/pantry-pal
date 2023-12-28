@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FoodListItemInput from "./FoodListItemInput";
 import FoodListItemList from "./FoodListItemList";
+import FindRecipeButton from "../Buttons/FindRecipeButton";
 
 type Props = {
   setCookieHandler: (foodList: string[]) => void;
@@ -44,14 +45,10 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
 
   return (
     <>
-      <button
-        className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
+      <FindRecipeButton
         disabled={foodList.length === 0}
-        onClick={() => handleFindRecipeClick()}
-        aria-label="Find Recipe"
-      >
-        Find Recipe
-      </button>
+        handleButtonClick={handleFindRecipeClick}
+      />
 
       {error && <span className="text-red-500 text-sm">{error}</span>}
 
