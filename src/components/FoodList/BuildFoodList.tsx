@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import FoodListItemInput from "./FoodListItemInput";
 
 type Props = {
   setCookieHandler: (foodList: string[]) => void;
@@ -9,13 +10,10 @@ type Props = {
 
 export default function BuildFoodList({ setCookieHandler }: Props) {
   const [foodList, setFoodList] = useState<string[]>([]);
-  const [foodItem, setFoodItem] = useState<string>("");
   const [error, setError] = useState<string>("");
   const router = useRouter();
 
-  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleAddItemToList = (foodItem: string) => {
     const capitalizedFoodItem =
       foodItem.charAt(0).toUpperCase() + foodItem.slice(1);
 
@@ -25,7 +23,6 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
     }
 
     setFoodList((prevArray) => [...prevArray, capitalizedFoodItem]);
-    setFoodItem("");
     setError("");
   };
 
@@ -58,22 +55,7 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
       {error && <span className="text-red-500 text-sm">{error}</span>}
 
       <div className="relative">
-        <form className="flex" onSubmit={handleFormSubmit}>
-          <input
-            type="text"
-            value={foodItem}
-            className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-blue-500 text-gray-800"
-            onChange={(e) => setFoodItem(e.target.value)}
-            placeholder="Enter item"
-          />
-          <button
-            className="transition-all rounded rounded-l-none bg-green-600 enabled:hover:bg-green-700 disabled:opacity-75 px-4 py-2"
-            disabled={!foodItem.trim()}
-            type="submit"
-          >
-            Add
-          </button>
-        </form>
+        <FoodListItemInput handleAddItemToList={handleAddItemToList} />
 
         {foodList.length > 0 && (
           <ul className="absolute w-full p-6 rounded-b">
