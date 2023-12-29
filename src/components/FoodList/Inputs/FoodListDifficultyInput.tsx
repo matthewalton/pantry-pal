@@ -1,4 +1,4 @@
-import styles from "../../styles/slider.module.css";
+import styles from "@/styles/slider.module.css";
 
 export default function FoodListDifficultyInput() {
   return (

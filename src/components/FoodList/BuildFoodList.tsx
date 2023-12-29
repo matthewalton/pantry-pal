@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FoodListItemInput from "./FoodListItemInput";
+import FoodListItemInput from "./Inputs/FoodListItemInput";
 import FoodListItemList from "./FoodListItemList";
-import FoodListDifficultyInput from "./FoodListDifficultyInput";
+import FoodListDifficultyInput from "./Inputs/FoodListDifficultyInput";
 
 export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
