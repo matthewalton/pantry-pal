@@ -1,11 +1,11 @@
 type Props = {
   foodList: string[];
-  handleRemoveItemFromList: (index: number) => void;
+  onRemoveItemFromList: (index: number) => void;
 };
 
 export default function FoodListItemList({
   foodList,
-  handleRemoveItemFromList,
+  onRemoveItemFromList,
 }: Props) {
   return (
     <>
@@ -21,7 +21,7 @@ export default function FoodListItemList({
                 <span
                   role="button"
                   className="text-xl text-red-500"
-                  onClick={() => handleRemoveItemFromList(index)}
+                  onClick={() => onRemoveItemFromList(index)}
                   aria-label="Remove Food Item"
                 >
                   &times;

@@ -4,25 +4,44 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FoodListItemInput from "./FoodListItemInput";
 import FoodListItemList from "./FoodListItemList";
-import FindRecipeButton from "../Buttons/FindRecipeButton";
 import FoodListDifficultyInput from "./FoodListDifficultyInput";
 
 export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
-  const [difficulty, setDifficulty] = useState<number>(6);
 
   const [error, setError] = useState<string>("");
   const router = useRouter();
 
-  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleFindRecipeSubmit = (
+    event: React.ChangeEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
-    const formElements = event.currentTarget.elements;
+    const formElements = event.target.elements;
 
-    const foodItemInput = formElements.namedItem(
-      "foodItem"
+    const difficultyInput = formElements.namedItem(
+      "difficulty"
     ) as HTMLInputElement;
-    const foodItem = foodItemInput.value.trim();
+
+    let queryString = `?items=${encodeURIComponent(foodList.join(","))}`;
+
+    const difficulty = difficultyInput.value;
+    if (difficulty) {
+      queryString += `&difficulty=${difficulty}`;
+    }
+
+    router.push(`recommended-recipes${queryString}`);
+  };
+
+  const handleAddItemToListSubmit = (
+    event: React.ChangeEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    const formElements = event.target.elements;
+
+    const itemInput = formElements.namedItem("foodItem") as HTMLInputElement;
+    const foodItem = itemInput.value.trim();
 
     const capitalizedFoodItem =
       foodItem.charAt(0).toUpperCase() + foodItem.slice(1);
@@ -46,37 +65,30 @@ export default function BuildFoodList() {
     setFoodList(newFoodList);
   };
 
-  const handleFindRecipeClick = () => {
-    let queryString = `?items=${encodeURIComponent(foodList.join(","))}`;
-
-    queryString += difficulty ? `&difficulty=${difficulty}` : "";
-
-    router.push(`recommended-recipes${queryString}`);
-  };
-
   return (
     <>
-      <FindRecipeButton
-        disabled={foodList.length === 0}
-        handleButtonClick={handleFindRecipeClick}
-      />
+      <form className="flex flex-col gap-5" onSubmit={handleFindRecipeSubmit}>
+        <button
+          className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
+          disabled={foodList.length === 0}
+          aria-label="Find Recipe"
+          type="submit"
+        >
+          Find Recipe
+        </button>
 
-      <form className="flex flex-col gap-5" onSubmit={handleFormSubmit}>
-        <FoodListDifficultyInput
-          difficulty={difficulty}
-          onDifficultyChange={() => setDifficulty}
+        <FoodListDifficultyInput />
+      </form>
+
+      {error && <span className="text-red-500 text-sm">{error}</span>}
+
+      <form className="relative" onSubmit={handleAddItemToListSubmit}>
+        <FoodListItemInput key={foodList.length} />
+
+        <FoodListItemList
+          foodList={foodList}
+          onRemoveItemFromList={handleRemoveItemClick}
         />
-
-        {error && <span className="text-red-500 text-sm">{error}</span>}
-
-        <div className="relative">
-          <FoodListItemInput key={foodList.length} />
-
-          <FoodListItemList
-            foodList={foodList}
-            handleRemoveItemFromList={handleRemoveItemClick}
-          />
-        </div>
       </form>
     </>
   );
