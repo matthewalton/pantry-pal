@@ -29,13 +29,18 @@ export const getRecipe = async (
 };
 
 export const fetchRecipes = async (
-  foodItems: string[]
+  foodItems: string[],
+  difficulty?: string
 ): Promise<RecipeStats[]> => {
   try {
-    const foodItemsQueryParam = foodItems.join(",");
+    const foodItemsQueryParam = encodeURIComponent(foodItems.join(","));
+
+    let queryString = `?items=${foodItemsQueryParam}`;
+
+    queryString += difficulty ? `&difficulty=${difficulty}` : "";
 
     const res = await fetch(
-      `${process.env.URL}/api/recommend-recipe?foodItems=${foodItemsQueryParam}`,
+      `${process.env.URL}/api/recommend-recipe${queryString}`,
       {
         method: "GET",
         headers: {

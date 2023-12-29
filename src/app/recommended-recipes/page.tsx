@@ -8,13 +8,16 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-  const foodItems = searchParams["items"]?.split(",");
+  const itemsSearchParam = decodeURIComponent(searchParams["items"] ?? "");
 
-  if (!foodItems) {
+  const items = itemsSearchParam.split(",");
+  const difficulty = searchParams["difficulty"];
+
+  if (!items) {
     redirect("/");
   }
 
-  const recipes = await fetchRecipes(foodItems);
+  const recipes = await fetchRecipes(items, difficulty);
 
   return (
     <div className="flex flex-col gap-5">
