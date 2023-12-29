@@ -10,7 +10,7 @@ export default function FoodListDifficultyInput() {
           type="range"
           min="1"
           max="10"
-          defaultValue={6}
+          defaultValue={8}
           className={styles.slider}
         />
       </label>

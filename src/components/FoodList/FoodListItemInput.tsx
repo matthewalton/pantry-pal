@@ -1,15 +1,26 @@
 import { useState } from "react";
 
-export default function FoodListItemInput() {
+type Props = {
+  onAddItemToList: (item: string) => void;
+};
+
+export default function FoodListItemInput({ onAddItemToList }: Props) {
   const [foodItem, setFoodItem] = useState("");
 
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    onAddItemToList(foodItem);
+    setFoodItem("");
+  };
+
   return (
-    <div className="flex">
+    <form className="flex" onSubmit={handleFormSubmit}>
       <input
         type="search"
         id="foodItem"
         value={foodItem}
-        className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-blue-500 text-gray-800"
+        className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-blue-500 text-gray-800 grow"
         onChange={(e) => setFoodItem(e.target.value)}
         placeholder="Enter item"
         autoFocus
@@ -21,6 +32,6 @@ export default function FoodListItemInput() {
       >
         Add
       </button>
-    </div>
+    </form>
   );
 }

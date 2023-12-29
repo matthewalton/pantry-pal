@@ -33,18 +33,10 @@ export default function BuildFoodList() {
     router.push(`recommended-recipes${queryString}`);
   };
 
-  const handleAddItemToListSubmit = (
-    event: React.ChangeEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-
-    const formElements = event.target.elements;
-
-    const itemInput = formElements.namedItem("foodItem") as HTMLInputElement;
-    const foodItem = itemInput.value.trim();
-
-    const capitalizedFoodItem =
-      foodItem.charAt(0).toUpperCase() + foodItem.slice(1);
+  const handleAddItemToList = (foodItem: string) => {
+    const capitalizedFoodItem = (
+      foodItem.charAt(0).toUpperCase() + foodItem.slice(1)
+    ).trim();
 
     if (foodList.includes(capitalizedFoodItem)) {
       setError("Item is already in your food list.");
@@ -67,29 +59,35 @@ export default function BuildFoodList() {
 
   return (
     <>
-      <form className="flex flex-col gap-5" onSubmit={handleFindRecipeSubmit}>
-        <button
-          className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
-          disabled={foodList.length === 0}
-          aria-label="Find Recipe"
-          type="submit"
-        >
-          Find Recipe
-        </button>
-
-        <FoodListDifficultyInput />
-      </form>
+      <FoodListItemInput onAddItemToList={handleAddItemToList} />
 
       {error && <span className="text-red-500 text-sm">{error}</span>}
 
-      <form className="relative" onSubmit={handleAddItemToListSubmit}>
-        <FoodListItemInput key={foodList.length} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="col">
+          <FoodListItemList
+            foodList={foodList}
+            onRemoveItemFromList={handleRemoveItemClick}
+          />
+        </div>
+        <div className="col">
+          <form
+            className="flex flex-col gap-5"
+            onSubmit={handleFindRecipeSubmit}
+          >
+            <FoodListDifficultyInput />
 
-        <FoodListItemList
-          foodList={foodList}
-          onRemoveItemFromList={handleRemoveItemClick}
-        />
-      </form>
+            <button
+              className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
+              disabled={foodList.length === 0}
+              aria-label="Find Recipe"
+              type="submit"
+            >
+              Find Recipe
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 }
