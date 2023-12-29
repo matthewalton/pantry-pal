@@ -1,7 +1,7 @@
 import { fetchRecipes } from "@/services/api";
 import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import BackButton from "@/components/Buttons/BackButton";
 
 export default async function Page({
   searchParams,
@@ -21,12 +21,7 @@ export default async function Page({
 
   return (
     <div className="flex flex-col gap-5">
-      <Link
-        href="/"
-        className="transition-colors rounded bg-gray-600 hover:bg-gray-700 py-2 px-4 me-auto"
-      >
-        Back
-      </Link>
+      <BackButton />
 
       {recipes?.map((recipe, index) => (
         <RecipeStatsCard key={index} recipeStats={recipe} showLink={true} />

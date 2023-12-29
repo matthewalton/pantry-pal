@@ -1,7 +1,7 @@
 import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
 import { getRecipe } from "@/services/api";
-import Link from "next/link";
 import RecipeDetailsCard from "@/components/Recipe/RecipeDetailsCard";
+import BackButton from "@/components/Buttons/BackButton";
 
 export default async function Page({
   params,
@@ -29,12 +29,7 @@ export default async function Page({
 
   return (
     <div className="flex flex-col gap-5">
-      <Link
-        href="/recommended-recipes"
-        className="transition-colors rounded bg-gray-600 hover:bg-gray-700 py-2 px-4 me-auto"
-      >
-        Back
-      </Link>
+      <BackButton />
 
       <RecipeStatsCard recipeStats={recipeStats} showLink={false} />
 

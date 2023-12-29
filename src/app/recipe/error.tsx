@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import BackButton from "@/components/Buttons/BackButton";
 import { useEffect } from "react";
 
 export default function Error({
@@ -17,6 +17,7 @@ export default function Error({
   return (
     <div className="flex flex-col gap-2.5">
       <h2>Something went wrong!</h2>
+
       <button
         onClick={
           // Attempt to recover by trying to re-render the segment
@@ -25,7 +26,8 @@ export default function Error({
       >
         Try again
       </button>
-      <Link href="/recommended-recipes">Go Back</Link>
+
+      <BackButton />
     </div>
   );
 }
