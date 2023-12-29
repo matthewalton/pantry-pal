@@ -7,11 +7,7 @@ import FoodListItemList from "./FoodListItemList";
 import FindRecipeButton from "../Buttons/FindRecipeButton";
 import FoodListDifficultyInput from "./FoodListDifficultyInput";
 
-type Props = {
-  setCookieHandler: (foodList: string[]) => void;
-};
-
-export default function BuildFoodList({ setCookieHandler }: Props) {
+export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<number>(6);
 
@@ -51,11 +47,11 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
   };
 
   const handleFindRecipeClick = () => {
-    setCookieHandler(foodList);
+    let queryString = `?items=${encodeURIComponent(foodList.join(","))}`;
 
-    let queryString = difficulty ? `difficulty=${difficulty}` : "";
+    queryString += difficulty ? `&difficulty=${difficulty}` : "";
 
-    router.push(`recommended-recipes?${queryString}`);
+    router.push(`recommended-recipes${queryString}`);
   };
 
   return (

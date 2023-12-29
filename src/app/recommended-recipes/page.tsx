@@ -1,18 +1,20 @@
-import { cookies } from "next/headers";
 import { fetchRecipes } from "@/services/api";
 import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default async function Page() {
-  const foodList = JSON.parse(
-    cookies().get("foodItems")?.value ?? "[]"
-  ) as string[];
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  const foodItems = searchParams["items"]?.split(",");
 
-  if (!foodList) {
-    throw new Error("No food items found.");
+  if (!foodItems) {
+    redirect("/");
   }
 
-  const recipes = await fetchRecipes(foodList);
+  const recipes = await fetchRecipes(foodItems);
 
   return (
     <div className="flex flex-col gap-5">
