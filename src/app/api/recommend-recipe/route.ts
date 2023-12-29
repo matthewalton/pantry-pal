@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
 
   const items = searchParams.get("items");
   const difficulty = searchParams.get("difficulty");
+  const portions = searchParams.get("portions");
 
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
@@ -32,9 +33,11 @@ export async function GET(req: NextRequest) {
       },
       {
         role: "assistant",
-        content: difficulty
-          ? `Difficulty: ${difficulty}/10`
-          : "Difficulty: any",
+        content: "Difficulty: " + (difficulty ? `${difficulty}/10` : "any"),
+      },
+      {
+        role: "assistant",
+        content: "Number of portions: " + (portions ? portions : "any"),
       },
       {
         role: "user",

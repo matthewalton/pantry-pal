@@ -16,8 +16,9 @@ export default async function Page({
 
   const items = itemsSearchParam.split(",");
   const difficulty = searchParams["difficulty"];
+  const portions = searchParams["portions"];
 
-  const recipes = await fetchRecipes(items, difficulty);
+  const recipes = await fetchRecipes(items, difficulty, portions);
 
   return (
     <div className="flex flex-col gap-5">
