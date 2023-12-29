@@ -5,6 +5,7 @@ import { useState } from "react";
 import FoodListItemInput from "./Inputs/FoodListItemInput";
 import FoodListItemList from "./FoodListItemList";
 import FoodListDifficultyInput from "./Inputs/FoodListDifficultyInput";
+import FoodListPortionsInput from "./Inputs/FoodListPortionsInput";
 
 export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
@@ -22,12 +23,20 @@ export default function BuildFoodList() {
     const difficultyInput = formElements.namedItem(
       "difficulty"
     ) as HTMLInputElement;
+    const portionsInput = formElements.namedItem(
+      "portions"
+    ) as HTMLInputElement;
 
     let queryString = `?items=${encodeURIComponent(foodList.join(","))}`;
 
     const difficulty = difficultyInput.value;
     if (difficulty) {
       queryString += `&difficulty=${difficulty}`;
+    }
+
+    const portions = portionsInput.value;
+    if (portions) {
+      queryString += `&portions=${portions}`;
     }
 
     router.push(`recommended-recipes${queryString}`);
@@ -75,7 +84,11 @@ export default function BuildFoodList() {
             className="flex flex-col gap-5"
             onSubmit={handleFindRecipeSubmit}
           >
-            <FoodListDifficultyInput />
+            <div className="flex flex-col gap-2">
+              <FoodListDifficultyInput />
+
+              <FoodListPortionsInput />
+            </div>
 
             <button
               className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"

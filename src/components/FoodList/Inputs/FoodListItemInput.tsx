@@ -20,7 +20,7 @@ export default function FoodListItemInput({ onAddItemToList }: Props) {
         type="search"
         id="foodItem"
         value={foodItem}
-        className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-blue-500 text-gray-800 grow"
+        className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-green-500 text-gray-800 grow"
         onChange={(e) => setFoodItem(e.target.value)}
         placeholder="Enter item"
         autoFocus
