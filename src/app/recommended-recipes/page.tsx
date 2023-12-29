@@ -10,12 +10,12 @@ export default async function Page({
 }) {
   const itemsSearchParam = decodeURIComponent(searchParams["items"] ?? "");
 
-  const items = itemsSearchParam.split(",");
-  const difficulty = searchParams["difficulty"];
-
-  if (!items) {
+  if (!itemsSearchParam) {
     redirect("/");
   }
+
+  const items = itemsSearchParam.split(",");
+  const difficulty = searchParams["difficulty"];
 
   const recipes = await fetchRecipes(items, difficulty);
 

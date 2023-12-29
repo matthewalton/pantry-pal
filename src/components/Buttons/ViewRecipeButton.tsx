@@ -1,30 +1,23 @@
-"use client";
-
 import { RecipeStats } from "@/types/Recipe";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Props = {
   recipeStats: RecipeStats;
-  setCookieHandler: (recipeStats: RecipeStats) => void;
 };
 
-export default function ViewRecipeButton({
-  recipeStats,
-  setCookieHandler,
-}: Props) {
-  const router = useRouter();
+export default function ViewRecipeButton({ recipeStats }: Props) {
+  const { title, difficulty, prepTime, cookTime, portions } = recipeStats;
 
-  const handleViewRecipe = (stats: RecipeStats) => {
-    setCookieHandler(stats);
-    router.push(`recipe/${encodeURIComponent(stats.title)}`);
-  };
+  const url = `recipe/${encodeURIComponent(
+    title
+  )}?difficulty=${difficulty}&portions=${portions}&prepTime=${prepTime}&cookTime=${cookTime}`;
 
   return (
-    <button
+    <Link
+      href={url}
       className="transition-colors rounded w-100 bg-green-600 hover:bg-green-700 p-2 text-center"
-      onClick={() => handleViewRecipe(recipeStats)}
     >
       View Recipe
-    </button>
+    </Link>
   );
 }

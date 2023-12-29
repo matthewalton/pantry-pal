@@ -1,26 +1,31 @@
 import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
-import { RecipeStats } from "@/types/Recipe";
-import { cookies } from "next/headers";
 import { getRecipe } from "@/services/api";
 import Link from "next/link";
 import RecipeDetailsCard from "@/components/Recipe/RecipeDetailsCard";
 
-export default async function Page({ params }: { params: { title: string } }) {
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { title: string };
+  searchParams: { [key: string]: string | undefined };
+}) {
   const title = decodeURIComponent(params.title);
 
-  const recipeStats = JSON.parse(
-    cookies().get("recipeStats")?.value ?? ""
-  ) as RecipeStats;
+  const difficulty = searchParams["difficulty"] ?? "";
+  const portions = searchParams["portions"] ?? "";
+  const prepTime = searchParams["prepTime"] ?? "";
+  const cookTime = searchParams["cookTime"] ?? "";
 
-  if (!recipeStats) {
-    throw new Error(`Could not find recipe: ${title}`);
-  }
+  const recipeStats = {
+    title: title,
+    difficulty: +difficulty,
+    portions: +portions,
+    prepTime: +prepTime,
+    cookTime: +cookTime,
+  };
 
-  const recipeDetails = await getRecipe(
-    title,
-    recipeStats.difficulty,
-    recipeStats.portions
-  );
+  const recipeDetails = await getRecipe(title, difficulty, portions);
 
   return (
     <div className="flex flex-col gap-5">

@@ -2,8 +2,8 @@ import { RecipeDetails, RecipeStats } from "@/types/Recipe";
 
 export const getRecipe = async (
   title: string,
-  difficulty: number,
-  portions: number
+  difficulty: string,
+  portions: string
 ): Promise<RecipeDetails> => {
   try {
     const encodedTitle = encodeURIComponent(title);
