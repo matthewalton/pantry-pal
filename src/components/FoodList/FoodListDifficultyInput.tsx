@@ -1,9 +1,24 @@
 import styles from "../../styles/slider.module.css";
 
-export default function FoodListDifficultyInput() {
+type Props = {
+  difficulty: number;
+  onDifficultyChange: () => void;
+};
+
+export default function FoodListDifficultyInput({
+  difficulty,
+  onDifficultyChange,
+}: Props) {
   return (
     <div className="w-full">
-      <input type="range" min="1" max="100" className={styles.slider} />
+      <input
+        type="range"
+        min="1"
+        max="10"
+        defaultValue={difficulty}
+        className={styles.slider}
+        onInput={onDifficultyChange}
+      />
     </div>
   );
 }

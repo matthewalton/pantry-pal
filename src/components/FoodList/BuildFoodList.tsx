@@ -13,6 +13,8 @@ type Props = {
 
 export default function BuildFoodList({ setCookieHandler }: Props) {
   const [foodList, setFoodList] = useState<string[]>([]);
+  const [difficulty, setDifficulty] = useState<number>(6);
+
   const [error, setError] = useState<string>("");
   const router = useRouter();
 
@@ -22,7 +24,7 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
     const formElements = event.currentTarget.elements;
 
     const foodItemInput = formElements.namedItem(
-      "foodInput"
+      "foodItem"
     ) as HTMLInputElement;
     const foodItem = foodItemInput.value.trim();
 
@@ -50,7 +52,10 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
 
   const handleFindRecipeClick = () => {
     setCookieHandler(foodList);
-    router.push("recommended-recipes");
+
+    let queryString = difficulty ? `difficulty=${difficulty}` : "";
+
+    router.push(`recommended-recipes?${queryString}`);
   };
 
   return (
@@ -61,7 +66,10 @@ export default function BuildFoodList({ setCookieHandler }: Props) {
       />
 
       <form className="flex flex-col gap-5" onSubmit={handleFormSubmit}>
-        <FoodListDifficultyInput />
+        <FoodListDifficultyInput
+          difficulty={difficulty}
+          onDifficultyChange={() => setDifficulty}
+        />
 
         {error && <span className="text-red-500 text-sm">{error}</span>}
 
