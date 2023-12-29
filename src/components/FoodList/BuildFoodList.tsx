@@ -70,7 +70,7 @@ export default function BuildFoodList() {
         {error && <span className="text-red-500 text-sm">{error}</span>}
 
         <div className="relative">
-          <FoodListItemInput />
+          <FoodListItemInput key={foodList.length} />
 
           <FoodListItemList
             foodList={foodList}
