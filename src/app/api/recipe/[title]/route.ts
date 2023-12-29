@@ -17,8 +17,6 @@ export async function GET(
   const difficulty = searchParams.get("difficulty");
   const portions = searchParams.get("portions");
 
-  return Response.json(getDummyData());
-
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
     response_format: { type: "json_object" },
@@ -51,32 +49,4 @@ export async function GET(
   });
 
   return Response.json(JSON.parse(response.choices[0].message.content ?? ""));
-}
-
-function getDummyData() {
-  return {
-    recipe: {
-      ingredients: [
-        "8 oz fettuccine pasta",
-        "2 boneless, skinless chicken breasts",
-        "2 tablespoons olive oil",
-        "2 cloves garlic, minced",
-        "1 cup heavy cream",
-        "1 cup grated Parmesan cheese",
-        "1/2 cup unsalted butter",
-        "Salt and pepper to taste",
-        "Fresh parsley for garnish",
-      ],
-      instructions: [
-        "Cook the fettuccine pasta according to package instructions. Drain and set aside.",
-        "Season the chicken breasts with salt and pepper. In a large skillet, heat 1 tablespoon of olive oil over medium-high heat. Add the chicken and cook until golden brown and no longer pink in the middle, about 6-7 minutes per side. Remove the chicken from the skillet and let it rest for a few minutes before slicing it into strips.",
-        "In the same skillet, add the remaining tablespoon of olive oil and minced garlic. Cook for 1-2 minutes until fragrant.",
-        "Reduce the heat to low and add the heavy cream, grated Parmesan cheese, and unsalted butter to the skillet. Stir continuously until the sauce is smooth and the cheese is melted.",
-        "Add the cooked fettuccine pasta to the skillet and toss until well coated with the Alfredo sauce.",
-        "Add the sliced chicken to the skillet and gently mix it with the pasta and sauce.",
-        "Season with salt and pepper to taste.",
-        "Garnish with fresh parsley and serve hot.",
-      ],
-    },
-  };
 }
