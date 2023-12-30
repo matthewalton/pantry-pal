@@ -1,12 +1,17 @@
+import { getRecipe } from "@/services/api";
+import { RecipeStats } from "@/types/Recipe";
+
 type Props = {
-  ingredients: string[];
-  instructions: string[];
+  recipeStats: RecipeStats;
 };
 
-export default function RecipeDetailsCard({
-  ingredients,
-  instructions,
-}: Props) {
+export default async function RecipeDetailsCard({ recipeStats }: Props) {
+  const { ingredients, instructions } = await getRecipe(
+    recipeStats.title,
+    recipeStats.difficulty.toString(),
+    recipeStats.portions.toString()
+  );
+
   return (
     <div className="flex flex-col gap-5">
       <ul>

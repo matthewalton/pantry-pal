@@ -2,8 +2,10 @@ import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
 import { getRecipe } from "@/services/api";
 import RecipeDetailsCard from "@/components/Recipe/RecipeDetailsCard";
 import BackButton from "@/components/Buttons/BackButton";
+import { RecipeDetails } from "@/types/Recipe";
+import { Suspense } from "react";
 
-export default async function Page({
+export default function Page({
   params,
   searchParams,
 }: {
@@ -25,18 +27,15 @@ export default async function Page({
     cookTime: +cookTime,
   };
 
-  const recipeDetails = await getRecipe(title, difficulty, portions);
-
   return (
     <div className="flex flex-col gap-5">
       <BackButton />
 
       <RecipeStatsCard recipeStats={recipeStats} showLink={false} />
 
-      <RecipeDetailsCard
-        ingredients={recipeDetails.ingredients}
-        instructions={recipeDetails.instructions}
-      />
+      <Suspense fallback={<div>Fetching recipe...</div>}>
+        <RecipeDetailsCard recipeStats={recipeStats} />
+      </Suspense>
     </div>
   );
 }
