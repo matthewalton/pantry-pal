@@ -82,7 +82,7 @@ export default function BuildFoodList() {
         </div>
         <div className="col">
           <form
-            className="flex flex-col gap-3 min-w-[200px]"
+            className="flex flex-col gap-3 md:min-w-[200px]"
             onSubmit={handleFindRecipeSubmit}
           >
             <div
