@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import BuildFoodList from "../src/components/FoodList/BuildFoodList";
 
 // Mock useRouter:
@@ -42,5 +42,21 @@ describe("BuildFoodList component", () => {
     fireEvent.click(removeButton);
 
     expect(queryByText("New Food Item")).not.toBeInTheDocument();
+  });
+
+  it("toggle show/hide options", () => {
+    render(<BuildFoodList />);
+
+    const optionsDiv = screen.getByTestId("options-div");
+    expect(optionsDiv).toHaveClass("hidden");
+
+    const toggleButton = screen.getByText(/Show Options/i);
+    fireEvent.click(toggleButton);
+
+    expect(optionsDiv).toHaveClass("flex");
+
+    fireEvent.click(toggleButton);
+
+    expect(optionsDiv).toHaveClass("hidden");
   });
 });

@@ -9,6 +9,7 @@ import FoodListPortionsInput from "./Inputs/FoodListPortionsInput";
 
 export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
+  const [showOptions, setShowOptions] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
   const router = useRouter();
@@ -81,14 +82,27 @@ export default function BuildFoodList() {
         </div>
         <div className="col">
           <form
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-3 min-w-[200px]"
             onSubmit={handleFindRecipeSubmit}
           >
-            <div className="flex flex-col gap-2">
+            <div
+              data-testid="options-div"
+              className={`${
+                showOptions ? "flex" : "hidden"
+              } flex flex-col gap-2`}
+            >
               <FoodListDifficultyInput />
 
               <FoodListPortionsInput />
             </div>
+
+            <button
+              className="text-sm text-gray-300 hover:text-white transition-colors"
+              type="button"
+              onClick={() => setShowOptions(!showOptions)}
+            >
+              {showOptions ? "Hide Options ▲" : "Show Options ▼"}
+            </button>
 
             <button
               className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
