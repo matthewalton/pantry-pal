@@ -1,9 +1,8 @@
-import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
-import { getRecipe } from "@/services/api";
-import RecipeDetailsCard from "@/components/Recipe/RecipeDetailsCard";
+import RecipeStatsCard from "@/components/Recipe/Cards/Stats/RecipeStatsCard";
+import RecipeDetailsCard from "@/components/Recipe/Cards/Details/RecipeDetailsCard";
 import BackButton from "@/components/Buttons/BackButton";
-import { RecipeDetails } from "@/types/Recipe";
 import { Suspense } from "react";
+import RecipeDetailsCardLoadingSkeleton from "@/components/Recipe/Cards/Details/RecipeDetailsCardLoadingSkeleton";
 
 export default function Page({
   params,
@@ -33,7 +32,7 @@ export default function Page({
 
       <RecipeStatsCard recipeStats={recipeStats} showLink={false} />
 
-      <Suspense fallback={<div>Fetching recipe...</div>}>
+      <Suspense fallback={<RecipeDetailsCardLoadingSkeleton />}>
         <RecipeDetailsCard recipeStats={recipeStats} />
       </Suspense>
     </div>

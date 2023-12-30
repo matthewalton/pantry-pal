@@ -1,5 +1,5 @@
 import { RecipeStats } from "@/types/Recipe";
-import ViewRecipeButton from "../Buttons/ViewRecipeButton";
+import ViewRecipeButton from "../../../Buttons/ViewRecipeButton";
 
 type Props = {
   recipeStats: RecipeStats;

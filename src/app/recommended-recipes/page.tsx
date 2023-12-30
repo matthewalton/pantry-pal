@@ -1,5 +1,5 @@
 import { fetchRecipes } from "@/services/api";
-import RecipeStatsCard from "@/components/Recipe/RecipeStatsCard";
+import RecipeStatsCard from "@/components/Recipe/Cards/Stats/RecipeStatsCard";
 import { redirect } from "next/navigation";
 import BackButton from "@/components/Buttons/BackButton";
 
