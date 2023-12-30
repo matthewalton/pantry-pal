@@ -22,6 +22,7 @@ export default function FoodListItemList({
               className="text-xl text-red-500"
               onClick={() => onRemoveItemFromList(index)}
               aria-label="Remove Food Item"
+              data-testid={`remove-item-${index}`}
             >
               &times;
             </span>
