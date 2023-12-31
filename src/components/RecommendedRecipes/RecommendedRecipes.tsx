@@ -12,7 +12,6 @@ export default async function RecommendedRecipes({
   difficulty,
   portions,
 }: Props) {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   const recipes = await fetchRecipes(items, difficulty, portions);
 
   if (recipes.length === 0) {
