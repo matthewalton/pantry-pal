@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import BackButton from "@/components/Buttons/BackButton";
 import RecommendedRecipes from "@/components/RecommendedRecipes/RecommendedRecipes";
 import { Suspense } from "react";
+import RecipeStatsCardLoadingSkeleton from "@/components/Recipe/Cards/Stats/RecipeStatsCardLoadingSkeleton";
 
 export default function Page({
   searchParams,
@@ -22,7 +23,15 @@ export default function Page({
     <div className="flex flex-col gap-5">
       <BackButton />
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <>
+            <RecipeStatsCardLoadingSkeleton />
+            <RecipeStatsCardLoadingSkeleton />
+            <RecipeStatsCardLoadingSkeleton />
+          </>
+        }
+      >
         <RecommendedRecipes
           items={items}
           difficulty={difficulty}
