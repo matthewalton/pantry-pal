@@ -1,9 +1,9 @@
-import { fetchRecipes } from "@/services/api";
-import RecipeStatsCard from "@/components/Recipe/Cards/Stats/RecipeStatsCard";
 import { redirect } from "next/navigation";
 import BackButton from "@/components/Buttons/BackButton";
+import RecommendedRecipes from "@/components/RecommendedRecipes/RecommendedRecipes";
+import { Suspense } from "react";
 
-export default async function Page({
+export default function Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -18,15 +18,17 @@ export default async function Page({
   const difficulty = searchParams["difficulty"];
   const portions = searchParams["portions"];
 
-  const recipes = await fetchRecipes(items, difficulty, portions);
-
   return (
     <div className="flex flex-col gap-5">
       <BackButton />
 
-      {recipes?.map((recipe, index) => (
-        <RecipeStatsCard key={index} recipeStats={recipe} showLink={true} />
-      ))}
+      <Suspense fallback={<div>Loading...</div>}>
+        <RecommendedRecipes
+          items={items}
+          difficulty={difficulty}
+          portions={portions}
+        />
+      </Suspense>
     </div>
   );
 }
