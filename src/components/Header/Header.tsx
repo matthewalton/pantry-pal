@@ -6,7 +6,6 @@ import { Session } from "next-auth";
 
 export default async function Header() {
   const session = (await getServerSession(GET)) as Session | null;
-  console.log(session);
 
   return (
     <div className="flex items-center gap-5 justify-end">
