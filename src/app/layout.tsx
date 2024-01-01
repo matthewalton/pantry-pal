@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NextAuthProvider from "@/components/Auth/NextAuthProvider";
+import Header from "@/components/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,11 @@ export default function RootLayout({
             <div className="relative z-10 flex justify-center place-items-center">
               <div className="absolute h-[300px] w-[480px] -translate-x-1/2 rounded-full bg-gradient-radial from-white to-transparent blur-2xl content-[''] dark:bg-gradient-to-br dark:from-transparent dark:to-green-700 dark:opacity-10 lg:h-[360px] z-10"></div>
 
-              <div className="relative z-20">{children}</div>
+              <div className="relative z-20 space-y-10">
+                <Header />
+
+                {children}
+              </div>
 
               <div className="absolute -z-20 h-[180px] w-[240px] translate-x-1/3 bg-gradient-conic from-emerald-200 via-green-200 blur-2xl content-[''] dark:from-emerald-900 dark:via-[#1b7540] dark:opacity-40"></div>
             </div>
