@@ -1,9 +1,10 @@
 import { getServerSession } from "next-auth/next";
-import { GET, POST } from "@/app/api/auth/[...nextauth]/route";
+import { GET } from "@/app/api/auth/[...nextauth]/route";
 import LoginButton from "@/components/Buttons/LoginButton";
+import { Session } from "next-auth";
 
 export default async function Page() {
-  const session = await getServerSession(GET);
+  const session = (await getServerSession(GET)) as Session | null;
 
   return (
     <div className="flex flex-col gap-5 items-stretch">
