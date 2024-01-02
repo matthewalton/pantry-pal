@@ -1,18 +1,28 @@
-import { getServerSession } from "next-auth/next";
-import { GET } from "@/app/api/auth/[...nextauth]/route";
-import { Session } from "next-auth";
+import { User } from "next-auth";
 import Image from "next/image";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default async function Page() {
-  const session = (await getServerSession(GET)) as Session | null;
+export default function Page() {
+  const token = headers().get("x-session-token");
+
+  if (!token) {
+    redirect("/");
+  }
+
+  const user = JSON.parse(token) as User;
+
+  if (!user) {
+    redirect("/");
+  }
 
   return (
     <div className="flex flex-col gap-5 items-stretch">
       <h1 className="font-bold text-xl">Profile</h1>
       <div className="flex gap-5">
-        {session?.user?.image && (
+        {user.picture && (
           <Image
-            src={session.user.image}
+            src={user.picture}
             alt="User profile picture"
             width={100}
             height={100}
@@ -20,8 +30,8 @@ export default async function Page() {
         )}
 
         <div className="flex flex-col gap-1">
-          <h2 className="font-bold text-lg">{session?.user?.name}</h2>
-          <span>{session?.user?.email}</span>
+          <h2 className="font-bold text-lg">{user.name}</h2>
+          <span>{user.email}</span>
         </div>
       </div>
     </div>
