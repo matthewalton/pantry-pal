@@ -1,5 +1,5 @@
 import { fetchRecipes } from "@/services/api";
-import RecipeStatsCard from "../Recipe/Cards/Stats/RecipeStatsCard";
+import RecipeStatsCard from "../Cards/Stats/RecipeStatsCard";
 
 type Props = {
   items: string[];

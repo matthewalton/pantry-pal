@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import BackButton from "@/components/Buttons/BackButton";
-import RecommendedRecipes from "@/components/RecommendedRecipes/RecommendedRecipes";
+import RecommendedRecipes from "@/components/Recipe/RecommendedRecipes/RecommendedRecipes";
 import { Suspense } from "react";
 import RecipeStatsCardLoadingSkeleton from "@/components/Recipe/Cards/Stats/RecipeStatsCardLoadingSkeleton";
 
