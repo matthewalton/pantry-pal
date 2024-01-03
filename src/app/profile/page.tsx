@@ -1,7 +1,7 @@
-import { User } from "next-auth";
 import Image from "next/image";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { JWT } from "next-auth/jwt";
 
 export default function Page() {
   const token = headers().get("x-session-token");
@@ -10,7 +10,7 @@ export default function Page() {
     redirect("/");
   }
 
-  const user = JSON.parse(token) as User;
+  const user = JSON.parse(token) as JWT;
 
   if (!user) {
     redirect("/");
