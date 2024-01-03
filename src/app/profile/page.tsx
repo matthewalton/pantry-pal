@@ -2,6 +2,7 @@ import Image from "next/image";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { JWT } from "next-auth/jwt";
+import MyRecipes from "@/components/Recipe/MyRecipes/MyRecipes";
 
 export default function Page() {
   const token = headers().get("x-session-token");
@@ -34,6 +35,8 @@ export default function Page() {
           <span>{user.email}</span>
         </div>
       </div>
+
+      <MyRecipes />
     </div>
   );
 }
