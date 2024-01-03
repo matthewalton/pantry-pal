@@ -3,6 +3,7 @@ import RecipeDetailsCard from "@/components/Recipe/Cards/Details/RecipeDetailsCa
 import BackButton from "@/components/Buttons/BackButton";
 import { Suspense } from "react";
 import RecipeDetailsCardLoadingSkeleton from "@/components/Recipe/Cards/Details/RecipeDetailsCardLoadingSkeleton";
+import SaveRecipeButton from "@/components/Buttons/SaveRecipeButton";
 
 export default function Page({
   params,
@@ -28,7 +29,11 @@ export default function Page({
 
   return (
     <div className="flex flex-col gap-5">
-      <BackButton />
+      <div className="flex flex-wrap gap-3">
+        <BackButton />
+
+        <SaveRecipeButton recipeStats={recipeStats} />
+      </div>
 
       <RecipeStatsCard recipeStats={recipeStats} showLink={false} />
 
