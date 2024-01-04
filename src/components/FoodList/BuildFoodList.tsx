@@ -97,7 +97,7 @@ export default function BuildFoodList() {
             </div>
 
             <button
-              className="text-sm text-gray-300 hover:text-white transition-colors"
+              className="text-sm transition-colors"
               type="button"
               onClick={() => setShowOptions(!showOptions)}
             >
@@ -105,7 +105,7 @@ export default function BuildFoodList() {
             </button>
 
             <button
-              className="transition-all rounded bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
+              className="transition-all rounded text-white bg-yellow-500 enabled:hover:bg-yellow-600 disabled:opacity-75 px-6 py-2 font-bold"
               disabled={foodList.length === 0}
               aria-label="Find Recipe"
               type="submit"

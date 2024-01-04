@@ -21,7 +21,7 @@ export default function LoginButton() {
 
   return (
     <button
-      className={`transition-colors font-bold py-1 px-4 rounded ${colours}`}
+      className={`transition-colors text-white font-bold py-1 px-4 rounded ${colours}`}
       onClick={() => handleClick()}
     >
       {text}

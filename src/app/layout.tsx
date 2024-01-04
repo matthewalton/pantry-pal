@@ -23,7 +23,7 @@ export default function RootLayout({
           <main className="flex min-h-screen items-center justify-center p-10 sm:p-0 relative z-10">
             <div className="fixed h-[300px] w-[480px] -translate-x-1/2 rounded-full bg-gradient-radial from-white to-transparent blur-2xl content-[''] dark:bg-gradient-to-br dark:from-transparent dark:to-green-700 dark:opacity-10 lg:h-[360px] z-10"></div>
 
-            <div className="md:container mx-auto relative z-20 space-y-10">
+            <div className="md:container relative z-20 space-y-10">
               <Header />
 
               {children}

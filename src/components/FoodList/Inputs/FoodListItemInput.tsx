@@ -26,7 +26,7 @@ export default function FoodListItemInput({ onAddItemToList }: Props) {
         autoFocus
       />
       <button
-        className="transition-all rounded rounded-l-none bg-green-600 enabled:hover:bg-green-700 disabled:opacity-75 px-4 py-2"
+        className="transition-all rounded rounded-l-none text-white bg-green-600 enabled:hover:bg-green-700 disabled:opacity-75 px-4 py-2"
         disabled={!foodItem.trim()}
         type="submit"
       >

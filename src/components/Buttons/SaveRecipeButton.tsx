@@ -51,7 +51,7 @@ export default function SaveRecipeButton({ recipeStats }: Props) {
   if (recipeIsSaved) {
     return (
       <button
-        className="transition-colors rounded bg-red-600 hover:bg-red-700 py-2 px-4"
+        className="transition-colors text-white rounded bg-red-600 hover:bg-red-700 py-2 px-4"
         onClick={() => handleRemoveRecipe()}
       >
         Remove Recipe
@@ -61,7 +61,7 @@ export default function SaveRecipeButton({ recipeStats }: Props) {
 
   return (
     <button
-      className="transition-colors rounded bg-green-600 hover:bg-green-700 py-2 px-4"
+      className="transition-colors text-white rounded bg-green-600 hover:bg-green-700 py-2 px-4"
       onClick={() => handleSaveRecipe()}
     >
       Save Recipe

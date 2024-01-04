@@ -15,7 +15,7 @@ export default function ViewRecipeButton({ recipeStats }: Props) {
   return (
     <Link
       href={url}
-      className="transition-colors rounded w-100 bg-green-600 hover:bg-green-700 p-2 text-center"
+      className="transition-colors text-white rounded w-100 bg-green-600 hover:bg-green-700 p-2 text-center"
     >
       View Recipe
     </Link>
