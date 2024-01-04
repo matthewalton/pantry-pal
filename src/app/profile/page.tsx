@@ -25,6 +25,7 @@ export default function Page() {
         {user.picture && (
           <Image
             src={user.picture}
+            className="shadow-lg"
             alt="User profile picture"
             width={100}
             height={100}
