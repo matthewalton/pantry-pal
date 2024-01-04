@@ -6,7 +6,12 @@ import RecipeStatsCard from "../Cards/Stats/RecipeStatsCard";
 import Link from "next/link";
 
 export default function MyRecipes() {
-  const recipesStore = localStorage.getItem("recipes");
+  let recipesStore = null;
+
+  if (typeof window !== "undefined") {
+    recipesStore = localStorage.getItem("recipes");
+  }
+
   let recipes: RecipeStats[] = [];
 
   if (recipesStore) {

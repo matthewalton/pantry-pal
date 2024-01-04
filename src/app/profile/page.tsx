@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { JWT } from "next-auth/jwt";
 import MyRecipes from "@/components/Recipe/MyRecipes/MyRecipes";
+import { Suspense } from "react";
 
 export default function Page() {
   const token = headers().get("x-session-token");
@@ -36,7 +37,9 @@ export default function Page() {
         </div>
       </div>
 
-      <MyRecipes />
+      <Suspense fallback={<div>Loading recipes...</div>}>
+        <MyRecipes />
+      </Suspense>
     </div>
   );
 }
