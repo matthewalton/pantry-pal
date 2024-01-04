@@ -19,9 +19,9 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-5 items-stretch">
+    <div className="flex flex-col flex-wrap gap-5 items-stretch">
       <h1 className="font-bold text-xl">Profile</h1>
-      <div className="flex gap-5">
+      <div className="flex flex-wrap gap-5">
         {user.picture && (
           <Image
             src={user.picture}

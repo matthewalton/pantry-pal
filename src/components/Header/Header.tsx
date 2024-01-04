@@ -8,7 +8,7 @@ export default async function Header() {
   const session = (await getServerSession(GET)) as Session | null;
 
   return (
-    <div className="flex items-center gap-5 justify-end">
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-1 justify-end">
       <Link href="/" className="transition-colors hover:text-green-200">
         Home
       </Link>

@@ -14,13 +14,13 @@ export default async function RecipeDetailsCard({ recipeStats }: Props) {
 
   return (
     <div className="flex flex-col gap-5">
-      <ul>
+      <ul className="list-inside">
         {ingredients.map((ingredient) => (
           <li key={ingredient}>{ingredient}</li>
         ))}
       </ul>
 
-      <ol className="list-decimal">
+      <ol className="list-decimal list-inside">
         {instructions.map((instruction) => (
           <li key={instruction}>{instruction}</li>
         ))}
