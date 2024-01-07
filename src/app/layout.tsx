@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NextAuthProvider from "@/components/Auth/NextAuthProvider";
 import Header from "@/components/Header/Header";
+import SignInPanel from "@/components/Auth/SignIn/SignInPanel";
+import { SignInPanelProvider } from "@/components/Auth/SignIn/SignInPanelProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +22,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>
-          <Header />
+          <SignInPanelProvider>
+            <Header />
 
-          <main className="mx-auto flex min-h-screen max-w-5xl flex-col items-stretch py-28 px-4 sm:px-6">
-            {children}
-          </main>
+            <main className="mx-auto flex max-w-5xl flex-col items-stretch py-28 px-4 sm:px-6">
+              {children}
+            </main>
+
+            <SignInPanel />
+          </SignInPanelProvider>
         </NextAuthProvider>
       </body>
     </html>
