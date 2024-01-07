@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NextAuthProvider from "@/components/Auth/NextAuthProvider";
+import NextAuthProvider from "@/components/Providers/NextAuthProvider";
 import Header from "@/components/Header/Header";
 import SignInPanel from "@/components/Auth/SignIn/Panel/SignInPanel";
-import { SignInPanelProvider } from "@/components/Auth/SignIn/Panel/SignInPanelProvider";
+import { SignInPanelProvider } from "@/components/Providers/SignInPanelProvider";
 import SignInOptions from "@/components/Auth/SignIn/Options/SignInOptions";
 
 const inter = Inter({ subsets: ["latin"] });
