@@ -6,10 +6,14 @@ import FoodListItemInput from "./Inputs/FoodListItemInput";
 import FoodListItemList from "./FoodListItemList";
 import FoodListDifficultyInput from "./Inputs/FoodListDifficultyInput";
 import FoodListPortionsInput from "./Inputs/FoodListPortionsInput";
+import { useSession } from "next-auth/react";
+import { useSignInPanel } from "../Providers/SignInPanelProvider";
 
 export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
   const [showOptions, setShowOptions] = useState<boolean>(false);
+  const { data: session } = useSession();
+  const { openPanel } = useSignInPanel();
 
   const [error, setError] = useState<string>("");
   const router = useRouter();
@@ -18,6 +22,11 @@ export default function BuildFoodList() {
     event: React.ChangeEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
+
+    if (!session) {
+      openPanel();
+      return;
+    }
 
     const formElements = event.target.elements;
 
