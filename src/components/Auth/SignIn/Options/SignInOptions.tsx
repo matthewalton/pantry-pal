@@ -17,7 +17,7 @@ export default async function SignInOptions() {
         them from any device.
       </p>
 
-      <div className="flex items-center justify-center sm:justify-start">
+      <div className="flex flex-col gap-2 items-center sm:items-start">
         {Object.values(providers).map((provider) => (
           <SignInOptionButton key={provider.id} provider={provider} />
         ))}
