@@ -14,10 +14,7 @@ export default async function Header() {
       </Link>
 
       {session && (
-        <Link
-          href="/profile"
-          className="transition-colors hover:text-green-200"
-        >
+        <Link href="/profile" className="transition-colors hover:text-gray-700">
           Profile
         </Link>
       )}
