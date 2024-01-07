@@ -15,7 +15,10 @@ export default function FoodListItemList({
     <ul className="px-1">
       {foodList.map((item, index) => {
         return (
-          <li key={item} className="flex items-center justify-between gap-2">
+          <li
+            key={item}
+            className="flex items-center justify-between gap-2 font-mono"
+          >
             <span>{item}</span>
             <span
               role="button"

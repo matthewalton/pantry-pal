@@ -13,7 +13,7 @@ export default async function RecipeDetailsCard({ recipeStats }: Props) {
   );
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 font-mono">
       <ul className="list-inside">
         {ingredients.map((ingredient) => (
           <li key={ingredient}>{ingredient}</li>
