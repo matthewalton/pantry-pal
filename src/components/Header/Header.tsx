@@ -9,7 +9,7 @@ export default async function Header() {
 
   return (
     <div className="flex flex-wrap items-center gap-x-5 gap-y-1 justify-end">
-      <Link href="/" className="transition-colors hover:text-green-200">
+      <Link href="/" className="transition-colors hover:text-gray-700">
         Home
       </Link>
 

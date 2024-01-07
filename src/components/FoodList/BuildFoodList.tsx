@@ -97,7 +97,7 @@ export default function BuildFoodList() {
             </div>
 
             <button
-              className="text-sm transition-colors"
+              className="text-sm transition-colors hover:text-gray-700"
               type="button"
               onClick={() => setShowOptions(!showOptions)}
             >
