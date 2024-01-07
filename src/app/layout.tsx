@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Pantry Pal",
-  description: "Got some food at home? See what you can make!",
+  description: "Got food at home? See what you can make!",
 };
 
 export default function RootLayout({

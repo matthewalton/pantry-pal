@@ -15,22 +15,26 @@ export default function FoodListItemInput({ onAddItemToList }: Props) {
   };
 
   return (
-    <form className="flex" onSubmit={handleFormSubmit}>
+    <form
+      className="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg"
+      onSubmit={handleFormSubmit}
+    >
       <input
-        type="search"
+        type="text"
         id="foodItem"
+        autoComplete="off"
         value={foodItem}
-        className="border rounded-md rounded-r-none px-4 py-2 focus:outline-none focus:border-green-500 text-gray-800 grow"
+        className="h-10 w-full resize-none bg-transparent px-2 font-mono text-base text-white placeholder:text-gray-400 sm:text-sm border-0 outline-none ring-0 focus:ring-0 transition-all duration-300"
         onChange={(e) => setFoodItem(e.target.value)}
         placeholder="Enter item"
         autoFocus
       />
       <button
-        className="transition-all rounded rounded-l-none text-white bg-green-600 enabled:hover:bg-green-700 disabled:opacity-75 px-4 py-2"
+        className="flex aspect-square h-8 w-8 items-center justify-center rounded-lg text-white outline-0 ring-0 hover:bg-white/25 focus-visible:bg-white/25"
         disabled={!foodItem.trim()}
         type="submit"
       >
-        Add
+        +
       </button>
     </form>
   );
