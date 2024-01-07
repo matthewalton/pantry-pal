@@ -3,8 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NextAuthProvider from "@/components/Auth/NextAuthProvider";
 import Header from "@/components/Header/Header";
-import SignInPanel from "@/components/Auth/SignIn/SignInPanel";
-import { SignInPanelProvider } from "@/components/Auth/SignIn/SignInPanelProvider";
+import SignInPanel from "@/components/Auth/SignIn/Panel/SignInPanel";
+import { SignInPanelProvider } from "@/components/Auth/SignIn/Panel/SignInPanelProvider";
+import SignInOptions from "@/components/Auth/SignIn/Options/SignInOptions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,9 @@ export default function RootLayout({
               {children}
             </main>
 
-            <SignInPanel />
+            <SignInPanel>
+              <SignInOptions />
+            </SignInPanel>
           </SignInPanelProvider>
         </NextAuthProvider>
       </body>

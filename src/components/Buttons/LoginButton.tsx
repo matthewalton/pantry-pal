@@ -1,9 +1,11 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { useSignInPanel } from "../Auth/SignIn/Panel/SignInPanelProvider";
 
 export default function LoginButton() {
   const { data: session } = useSession();
+  const { openPanel } = useSignInPanel();
 
   const handleClick = () => {
     if (session) {
@@ -11,7 +13,7 @@ export default function LoginButton() {
       return;
     }
 
-    signIn();
+    openPanel();
   };
 
   const text = session ? "Sign out" : "Sign in";

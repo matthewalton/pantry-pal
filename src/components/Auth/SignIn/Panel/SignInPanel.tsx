@@ -2,9 +2,13 @@
 
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useSignInPanel } from "../SignIn/SignInPanelProvider";
+import { useSignInPanel } from "./SignInPanelProvider";
 
-export default function SlideInSlideInPanel() {
+export default function SlideInSlideInPanel({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { isPanelOpen, closePanel } = useSignInPanel();
 
   return (
@@ -35,15 +39,8 @@ export default function SlideInSlideInPanel() {
                 leaveTo="translate-y-full"
               >
                 <Dialog.Panel className="pointer-events-auto relative h-[500px] w-full max-h-md">
-                  <div className="flex h-full flex-col bg-white py-6 shadow-xl">
-                    <div className="px-4 sm:px-6">
-                      <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                        Panel title
-                      </Dialog.Title>
-                    </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                      {/* Your content */}
-                    </div>
+                  <div className="flex h-full flex-col items-center bg-white py-6 shadow-xl">
+                    {children}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
