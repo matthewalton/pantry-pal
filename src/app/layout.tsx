@@ -20,16 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>
-          <main className="flex min-h-screen items-center justify-center p-10 md:p-0 relative z-10">
-            <div className="fixed h-[300px] w-[480px] -translate-x-1/2 rounded-full bg-gradient-radial from-white to-transparent blur-2xl content-[''] dark:bg-gradient-to-br dark:from-transparent dark:to-green-700 dark:opacity-10 lg:h-[360px] z-10"></div>
+          <Header />
 
-            <div className="md:container relative z-20 space-y-10">
-              <Header />
-
-              {children}
-            </div>
-
-            <div className="fixed -z-20 h-[180px] w-[240px] translate-x-1/3 bg-gradient-conic from-emerald-200 via-green-200 blur-2xl content-[''] dark:from-emerald-900 dark:via-[#1b7540] dark:opacity-40"></div>
+          <main className="mx-auto flex min-h-screen max-w-5xl flex-col items-stretch py-28 px-4 sm:px-6">
+            {children}
           </main>
         </NextAuthProvider>
       </body>

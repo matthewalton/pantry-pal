@@ -68,12 +68,12 @@ export default function BuildFoodList() {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-5 items-stretch max-w-lg mx-auto">
       <FoodListItemInput onAddItemToList={handleAddItemToList} />
 
       {error && <span className="text-red-500 text-sm">{error}</span>}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom-4">
         <div className="col">
           <FoodListItemList
             foodList={foodList}
@@ -115,6 +115,6 @@ export default function BuildFoodList() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
