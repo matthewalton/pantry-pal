@@ -18,6 +18,7 @@ export const getRecipeStatsFromKey = (key: string): RecipeStats => {
   const portions = Number(params.get("portions")) || 0;
 
   return {
+    id: 0,
     title: decodeURIComponent(title),
     difficulty,
     prepTime,

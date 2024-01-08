@@ -20,6 +20,7 @@ export default function Page({
   const cookTime = searchParams["cookTime"] ?? "";
 
   const recipeStats = {
+    id: 0,
     title: title,
     difficulty: +difficulty,
     portions: +portions,
