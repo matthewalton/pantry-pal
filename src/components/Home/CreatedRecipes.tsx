@@ -13,11 +13,13 @@ export default async function CreatedRecipes() {
     <div>
       <h2 className="text-lg font-medium mb-4">Recent Recipes</h2>
 
-      {rows.map((row) => (
-        <div key={row.id}>
-          {row.id} - {row.title}
-        </div>
-      ))}
+      <div className="grid grid-cols-3 gap-3">
+        {rows.map((row) => (
+          <div key={row.id} className="col">
+            {row.id} - {row.title}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
