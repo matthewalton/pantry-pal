@@ -1,4 +1,4 @@
-import BuildFoodList from "@/components/FoodList/BuildFoodList";
+import BuildFoodList from "@/components/Home/FoodList/BuildFoodList";
 
 export default function Home() {
   return (

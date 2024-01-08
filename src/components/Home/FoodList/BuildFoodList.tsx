@@ -7,7 +7,7 @@ import FoodListItemList from "./FoodListItemList";
 import FoodListDifficultyInput from "./Inputs/FoodListDifficultyInput";
 import FoodListPortionsInput from "./Inputs/FoodListPortionsInput";
 import { useSession } from "next-auth/react";
-import { useSignInPanel } from "../Providers/SignInPanelProvider";
+import { useSignInPanel } from "../../Providers/SignInPanelProvider";
 
 export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
