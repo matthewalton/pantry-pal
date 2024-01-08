@@ -1,4 +1,5 @@
 import { RecipeDetails, RecipeStats } from "@/types/Recipe";
+import { insertRecipes } from "./db";
 
 export const getRecipe = async (
   title: string,
@@ -61,8 +62,11 @@ export const fetchRecipes = async (
     }
 
     const data = await res.json();
+    const recipes = data.recipes;
 
-    return data.recipes;
+    await insertRecipes(recipes);
+
+    return recipes;
   } catch (error) {
     console.error("Error fetching recipes:", error);
     throw new Error("Failed to fetch recipes");
