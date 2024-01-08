@@ -28,7 +28,7 @@ export default function Page({
   };
 
   return (
-    <div className="flex items-start flex-col gap-5">
+    <div className="flex items-start flex-col gap-5 w-full max-w-xl mx-auto">
       <div className="flex flex-wrap gap-3">
         <BackButton />
 

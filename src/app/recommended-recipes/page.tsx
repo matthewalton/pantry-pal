@@ -20,7 +20,7 @@ export default function Page({
   const portions = searchParams["portions"];
 
   return (
-    <div className="flex items-stretch flex-col gap-5">
+    <div className="flex items-stretch flex-col gap-5 w-full max-w-lg">
       <div>
         <BackButton />
       </div>

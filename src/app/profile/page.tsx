@@ -19,7 +19,7 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col flex-wrap gap-5 items-stretch">
+    <div className="flex flex-col flex-wrap gap-5 items-stretch w-full max-w-lg">
       <h1 className="font-bold text-xl">Profile</h1>
       <div className="flex flex-wrap gap-5">
         {user.picture && (
