@@ -17,7 +17,7 @@ export default function FoodListItemList({
         return (
           <li
             key={item}
-            className="flex items-center justify-between gap-2 font-mono duration-1200 ease-in-out animate-in fade-in slide-in-from-bottom-4"
+            className="flex items-center justify-between gap-2 font-mono ease-in-out animate-in fade-in slide-in-from-bottom-4"
           >
             <span>{item}</span>
             <span
