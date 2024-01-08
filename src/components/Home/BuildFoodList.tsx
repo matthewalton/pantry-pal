@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FoodListItemInput from "./Inputs/FoodListItemInput";
-import FoodListItemList from "./FoodListItemList";
-import FoodListDifficultyInput from "./Inputs/FoodListDifficultyInput";
-import FoodListPortionsInput from "./Inputs/FoodListPortionsInput";
+import FoodListItemInput from "./FoodList/Inputs/FoodListItemInput";
+import FoodListItemList from "./FoodList/FoodListItemList";
+import FoodListDifficultyInput from "./FoodList/Inputs/FoodListDifficultyInput";
+import FoodListPortionsInput from "./FoodList/Inputs/FoodListPortionsInput";
 import { useSession } from "next-auth/react";
-import { useSignInPanel } from "../../Providers/SignInPanelProvider";
+import { useSignInPanel } from "../Providers/SignInPanelProvider";
 
 export default function BuildFoodList() {
   const [foodList, setFoodList] = useState<string[]>([]);
