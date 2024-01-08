@@ -24,3 +24,18 @@ export async function insertRecipes(recipes: RecipeStats[]) {
     await client.release();
   }
 }
+
+export async function getRecipes(pageSize: number, pageNumber: number) {
+  const client = await db.connect();
+  const offset = (pageNumber - 1) * pageSize;
+
+  try {
+    const { rows } = await client.query<RecipeStats>(
+      `SELECT * from RECIPES ORDER BY id DESC LIMIT ${pageSize} OFFSET ${offset};`
+    );
+
+    return rows;
+  } finally {
+    await client.release();
+  }
+}

@@ -1,22 +1,20 @@
-import { sql } from "@vercel/postgres";
+import RecipeStatsCard from "../Recipe/Cards/Stats/RecipeStatsCard";
+import { getRecipes } from "@/services/db";
 
 export default async function CreatedRecipes() {
-  const pageSize = 9; // Number of records per page
-  const pageNumber = 1; // Specific page number
+  const pageSize = 9;
+  const pageNumber = 1;
 
-  const offset = (pageNumber - 1) * pageSize;
-
-  const { rows } =
-    await sql`SELECT * from RECIPES ORDER BY id DESC LIMIT ${pageSize} OFFSET ${offset};`;
+  const recipes = await getRecipes(pageSize, pageNumber);
 
   return (
     <div>
-      <h2 className="text-lg font-medium mb-4">Recent Recipes</h2>
+      <h2 className="text-2xl font-medium mb-4">Recent Recipes</h2>
 
-      <div className="grid grid-cols-3 gap-3">
-        {rows.map((row) => (
-          <div key={row.id} className="col">
-            {row.id} - {row.title}
+      <div className="grid grid-cols-2 gap-3">
+        {recipes.map((recipe) => (
+          <div key={recipe.id} className="col">
+            <RecipeStatsCard recipeStats={recipe} showLink={true} />
           </div>
         ))}
       </div>
