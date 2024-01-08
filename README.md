@@ -6,7 +6,7 @@
 
 ## Tech Stack
 
-- [Jest](https://jestjs.io/docs) - Testing
+- [Jest](https://jestjs.io) - Testing
 - [Next.js](https://nextjs.org/docs/app) - App Router, Server
 - [NextAuth.js](https://next-auth.js.org) - Authentication
 - [Open AI](https://platform.openai.com/docs) - AI API
