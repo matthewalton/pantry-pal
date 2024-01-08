@@ -26,7 +26,7 @@ export default function RootLayout({
           <SignInPanelProvider>
             <Header />
 
-            <main className="mx-auto flex max-w-5xl flex-col grow items-stretch justify-center px-4 sm:px-6">
+            <main className="mx-auto flex max-w-5xl flex-col grow items-stretch justify-center pb-20 px-4 sm:px-6">
               {children}
             </main>
 
