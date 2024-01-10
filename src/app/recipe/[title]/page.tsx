@@ -1,7 +1,7 @@
-import RecipeDetails from "@/components/Recipe/RecipeDetails";
+import RecipeDetails from "@/app/_components/Recipe/RecipeDetails";
 import { Suspense } from "react";
-import RecipeDetailsCardLoadingSkeleton from "@/components/Recipe/RecipeDetailsLoadingSkeleton";
-import SaveRecipeButton from "@/components/Buttons/SaveRecipeButton";
+import RecipeDetailsCardLoadingSkeleton from "@/app/_components/Recipe/RecipeDetailsLoadingSkeleton";
+import SaveRecipeButton from "@/app/_components/Buttons/SaveRecipeButton";
 
 export default function Page({ params }: { params: { title: string } }) {
   const title = decodeURIComponent(params.title);

@@ -1,5 +1,5 @@
-import BuildFoodList from "@/components/Home/BuildFoodList";
-import CreatedRecipes from "@/components/Home/CreatedRecipes";
+import BuildFoodList from "@/app/_components/Home/BuildFoodList";
+import CreatedRecipes from "@/app/_components/Home/CreatedRecipes";
 
 export default function Home() {
   return (
