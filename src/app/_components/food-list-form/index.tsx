@@ -13,9 +13,11 @@ export default function FoodListForm() {
   const { data: session } = useSession();
   const { openPanel } = useSignInPanel();
 
-  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!session) openPanel();
+  const handleAuthCheck = (event: React.ChangeEvent<HTMLFormElement>) => {
+    if (!session) {
+      event.preventDefault();
+      openPanel();
+    }
   };
 
   const handleAddItemToList = (foodItem: string) => {
@@ -45,6 +47,7 @@ export default function FoodListForm() {
     <form
       className="flex flex-col gap-3 items-stretch w-full max-w-lg mx-auto duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom-4"
       action={formAction}
+      onSubmit={handleAuthCheck}
     >
       <FoodListInput onAddItemToList={handleAddItemToList} />
 
