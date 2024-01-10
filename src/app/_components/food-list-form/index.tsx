@@ -3,27 +3,19 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useSignInPanel } from "../Providers";
-import { createRecipe } from "@/services/api";
 import FoodListInput from "../food-list-input";
+import { createRecipe } from "./action";
+import { useFormState } from "react-dom";
 
 export default function FoodListForm() {
+  const [formState, formAction] = useFormState(createRecipe, { message: "" });
   const [foodList, setFoodList] = useState<string[]>([]);
   const { data: session } = useSession();
   const { openPanel } = useSignInPanel();
 
-  const [error, setError] = useState<string>("");
-
-  const handleCreateRecipeSubmit = (
-    event: React.ChangeEvent<HTMLFormElement>
-  ) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (!session) {
-      openPanel();
-      return;
-    }
-
-    createRecipe(foodList);
+    if (!session) openPanel();
   };
 
   const handleAddItemToList = (foodItem: string) => {
@@ -32,12 +24,11 @@ export default function FoodListForm() {
     ).trim();
 
     if (foodList.includes(capitalizedFoodItem)) {
-      setError("Item is already in your food list.");
+      formState.message = "Item is already in your food list.";
       return;
     }
 
     setFoodList((prevArray) => [...prevArray, capitalizedFoodItem]);
-    setError("");
   };
 
   const handleRemoveItemClick = (index: number) => {
@@ -53,11 +44,15 @@ export default function FoodListForm() {
   return (
     <form
       className="flex flex-col gap-3 items-stretch w-full max-w-lg mx-auto duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom-4"
-      onSubmit={handleCreateRecipeSubmit}
+      action={formAction}
     >
       <FoodListInput onAddItemToList={handleAddItemToList} />
 
-      {error && <span className="text-red-500 text-sm mx-auto">{error}</span>}
+      {formState.message && (
+        <span className="text-red-500 text-sm mx-auto">
+          {formState.message}
+        </span>
+      )}
 
       <ul className="px-1">
         {foodList.map((item, index) => {
@@ -80,6 +75,8 @@ export default function FoodListForm() {
           );
         })}
       </ul>
+
+      <input type="hidden" name="foodList" value={JSON.stringify(foodList)} />
 
       <button
         className="transition-all rounded border enabled:bg-white enabled:text-black disabled:bg-gray-100 disabled:text-gray-500 enabled:hover:bg-gray-50 px-6 py-2 font-medium"
