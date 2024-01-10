@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { useSignInPanel } from "../Providers/SignInPanelProvider";
+import { useSignInPanel } from "../providers/SignInPanelProvider";
 
 export default function LoginButton() {
   const { data: session } = useSession();

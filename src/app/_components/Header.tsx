@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth/next";
-import LoginButton from "../Buttons/LoginButton";
+import LoginButton from "./buttons/LoginButton";
 import { GET } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { Session } from "next-auth";

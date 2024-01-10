@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import FoodListItemInput from "./FoodList/Inputs/FoodListItemInput";
-import FoodListItemList from "./FoodList/FoodListItemList";
+import FoodListItemInput from "./food-list/inputs/FoodListItemInput";
+import FoodListItemList from "./food-list/FoodListItemList";
 import { useSession } from "next-auth/react";
-import { useSignInPanel } from "../Providers/SignInPanelProvider";
+import { useSignInPanel } from "../providers/SignInPanelProvider";
 import { createRecipe } from "@/services/api";
 
 export default function BuildFoodList() {
