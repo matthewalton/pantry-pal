@@ -3,7 +3,7 @@
 import { RecipeStats } from "@/types/Recipe";
 import { db } from "@vercel/postgres";
 
-export async function insertRecipe(recipeTitle: string) {
+export async function insertRecipe(recipeTitle: string, uuid: string) {
   const client = await db.connect();
 
   try {
@@ -13,8 +13,9 @@ export async function insertRecipe(recipeTitle: string) {
     );
 
     if (existingRecipe.rows.length === 0) {
-      await client.query("INSERT INTO recipes (title) VALUES ($1)", [
+      await client.query("INSERT INTO recipes (title, uuid) VALUES ($1, $2)", [
         recipeTitle,
+        uuid,
       ]);
     }
   } finally {
@@ -32,6 +33,20 @@ export async function getRecipes(pageSize: number, pageNumber: number) {
     );
 
     return rows;
+  } finally {
+    client.release();
+  }
+}
+
+export async function getRecipe(uuid: string) {
+  const client = await db.connect();
+
+  try {
+    const { rows } = await client.query<RecipeStats>(
+      "SELECT * FROM RECIPES WHERE uuid = $1 LIMIT 1;",
+      [uuid]
+    );
+    return rows[0];
   } finally {
     client.release();
   }

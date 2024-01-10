@@ -2,6 +2,7 @@
 
 import { insertRecipe } from "@/services/db";
 import { redirect } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
 
 interface FormState {
   message: string;
@@ -17,7 +18,7 @@ export async function createRecipe(
 
   const foodListQueryParam = JSON.parse(foodList).join(",");
 
-  let recipeTitle = "";
+  const id = uuidv4();
 
   try {
     const res = await fetch(
@@ -36,16 +37,12 @@ export async function createRecipe(
       return { message: "Connection error, failed to create recipe." };
     }
 
-    recipeTitle = await res.json();
-    await insertRecipe(recipeTitle);
+    const data = await res.json();
+    await insertRecipe(data, id);
   } catch (error) {
     console.error(error);
     return { message: "Connection error, please refresh the page." };
   }
 
-  if (!recipeTitle) {
-    redirect("/");
-  }
-
-  redirect(`/recipe/${encodeURIComponent(recipeTitle)}`);
+  redirect(`/recipe/${id}`);
 }

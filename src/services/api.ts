@@ -1,9 +1,6 @@
 "use server";
 
 import { RecipeDetails } from "@/types/Recipe";
-import { insertRecipe } from "./db";
-import { redirect } from "next/navigation";
-import { Redirect } from "next";
 
 export const getRecipe = async (
   title: string,
@@ -31,28 +28,4 @@ export const getRecipe = async (
     console.error("Error fetching recipe:", error);
     throw new Error("Failed to fetch recipe");
   }
-};
-
-export const createRecipe = async (foodItems: string[]): Promise<Redirect> => {
-  const foodItemsQueryParam = encodeURIComponent(foodItems.join(","));
-
-  const res = await fetch(
-    `${process.env.URL}/api/create-recipe?items=${foodItemsQueryParam}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  const recipeTitle = await res.json();
-
-  await insertRecipe(recipeTitle);
-
-  redirect(`/recipe/${encodeURIComponent(recipeTitle)}`);
 };
