@@ -4,7 +4,7 @@ import { useState } from "react";
 import FoodListItemInput from "./food-list/inputs/FoodListItemInput";
 import FoodListItemList from "./food-list/FoodListItemList";
 import { useSession } from "next-auth/react";
-import { useSignInPanel } from "../providers/SignInPanelProvider";
+import { useSignInPanel } from "../Providers";
 import { createRecipe } from "@/services/api";
 
 export default function BuildFoodList() {

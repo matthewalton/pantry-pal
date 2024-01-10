@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useSignInPanel } from "@/app/_components/providers/SignInPanelProvider";
+import { useSignInPanel } from "@/app/_components/Providers";
 
 export default function SlideInSlideInPanel({
   children,
