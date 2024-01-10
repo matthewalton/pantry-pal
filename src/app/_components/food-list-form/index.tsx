@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import FoodListItemInput from "./food-list/inputs/FoodListItemInput";
-import FoodListItemList from "./food-list/FoodListItemList";
 import { useSession } from "next-auth/react";
 import { useSignInPanel } from "../Providers";
 import { createRecipe } from "@/services/api";
+import FoodListInput from "../food-list-input";
 
-export default function BuildFoodList() {
+export default function FoodListForm() {
   const [foodList, setFoodList] = useState<string[]>([]);
   const { data: session } = useSession();
   const { openPanel } = useSignInPanel();
@@ -56,14 +55,31 @@ export default function BuildFoodList() {
       className="flex flex-col gap-3 items-stretch w-full max-w-lg mx-auto duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom-4"
       onSubmit={handleCreateRecipeSubmit}
     >
-      <FoodListItemInput onAddItemToList={handleAddItemToList} />
+      <FoodListInput onAddItemToList={handleAddItemToList} />
 
       {error && <span className="text-red-500 text-sm mx-auto">{error}</span>}
 
-      <FoodListItemList
-        foodList={foodList}
-        onRemoveItemFromList={handleRemoveItemClick}
-      />
+      <ul className="px-1">
+        {foodList.map((item, index) => {
+          return (
+            <li
+              key={item}
+              className="flex items-center justify-between gap-2 font-mono ease-in-out animate-in fade-in slide-in-from-bottom-4"
+            >
+              <span>{item}</span>
+              <span
+                role="button"
+                className="text-xl text-red-500"
+                onClick={() => handleRemoveItemClick(index)}
+                aria-label="Remove Food Item"
+                data-testid={`remove-item-${index}`}
+              >
+                &times;
+              </span>
+            </li>
+          );
+        })}
+      </ul>
 
       <button
         className="transition-all rounded border enabled:bg-white enabled:text-black disabled:bg-gray-100 disabled:text-gray-500 enabled:hover:bg-gray-50 px-6 py-2 font-medium"

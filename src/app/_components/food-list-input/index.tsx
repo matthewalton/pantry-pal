@@ -4,7 +4,7 @@ type Props = {
   onAddItemToList: (item: string) => void;
 };
 
-export default function FoodListItemInput({ onAddItemToList }: Props) {
+export default function FoodListInput({ onAddItemToList }: Props) {
   const [foodItem, setFoodItem] = useState("");
 
   const handleInputSubmit = () => {

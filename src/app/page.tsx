@@ -1,5 +1,5 @@
-import BuildFoodList from "@/app/_components/food-list-form/BuildFoodList";
-import CreatedRecipes from "@/app/_components/food-list-form/CreatedRecipes";
+import FoodListForm from "@/app/_components/food-list-form";
+import CreatedRecipes from "@/app/_components/recipe/CreatedRecipes";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
           Got food at home? See what you can make!
         </p>
 
-        <BuildFoodList />
+        <FoodListForm />
       </div>
 
       <div className="duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom-4">
