@@ -1,5 +1,6 @@
 interface Recipe {
   id: number;
+  uuid: string;
   title: string;
 }
 

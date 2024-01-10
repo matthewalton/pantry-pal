@@ -10,6 +10,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   if (!data) redirect("/");
 
   const recipeStats = {
+    uuid: params.id,
     id: 0,
     title: data.title,
     difficulty: 0,

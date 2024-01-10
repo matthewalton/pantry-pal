@@ -1,4 +1,5 @@
 import { getRecipes } from "@/services/db";
+import Link from "next/link";
 
 export default async function CreatedRecipes() {
   const pageSize = 9;
@@ -13,7 +14,7 @@ export default async function CreatedRecipes() {
       <div className="grid grid-cols-2 gap-3">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="col">
-            {recipe.title}
+            <Link href={`/recipe/${recipe.uuid}`}>{recipe.title}</Link>
           </div>
         ))}
       </div>
