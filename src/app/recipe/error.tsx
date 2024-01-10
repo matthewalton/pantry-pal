@@ -1,6 +1,5 @@
 "use client";
 
-import BackButton from "@/components/Buttons/BackButton";
 import { useEffect } from "react";
 
 export default function Error({
@@ -26,8 +25,6 @@ export default function Error({
       >
         Try again
       </button>
-
-      <BackButton />
     </div>
   );
 }

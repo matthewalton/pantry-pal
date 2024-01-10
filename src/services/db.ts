@@ -1,27 +1,24 @@
+"use server";
+
 import { RecipeStats } from "@/types/Recipe";
 import { db } from "@vercel/postgres";
 
-export async function insertRecipes(recipes: RecipeStats[]) {
+export async function insertRecipe(recipeTitle: string) {
   const client = await db.connect();
 
   try {
-    for (const recipe of recipes) {
-      const { title, difficulty, prepTime, cookTime, portions } = recipe;
+    const existingRecipe = await client.query(
+      "SELECT 1 FROM recipes WHERE title = $1",
+      [recipeTitle]
+    );
 
-      try {
-        await client.query(
-          `
-            INSERT INTO recipes (title, difficulty, prepTime, cookTime, portions)
-            VALUES ($1, $2, $3, $4, $5)
-          `,
-          [title, difficulty, prepTime, cookTime, portions]
-        );
-      } catch (insertError) {
-        console.error(`Failed to insert recipe "${title}":`, insertError);
-      }
+    if (existingRecipe.rows.length === 0) {
+      await client.query("INSERT INTO recipes (title) VALUES ($1)", [
+        recipeTitle,
+      ]);
     }
   } finally {
-    await client.release();
+    client.release();
   }
 }
 
@@ -36,6 +33,6 @@ export async function getRecipes(pageSize: number, pageNumber: number) {
 
     return rows;
   } finally {
-    await client.release();
+    client.release();
   }
 }

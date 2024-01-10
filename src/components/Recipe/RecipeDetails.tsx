@@ -5,7 +5,7 @@ type Props = {
   recipeStats: RecipeStats;
 };
 
-export default async function RecipeDetailsCard({ recipeStats }: Props) {
+export default async function RecipeDetails({ recipeStats }: Props) {
   const { ingredients, instructions } = await getRecipe(
     recipeStats.title,
     recipeStats.difficulty.toString(),

@@ -7,18 +7,13 @@ type Props = {
 export default function FoodListItemInput({ onAddItemToList }: Props) {
   const [foodItem, setFoodItem] = useState("");
 
-  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleInputSubmit = () => {
     onAddItemToList(foodItem);
     setFoodItem("");
   };
 
   return (
-    <form
-      className="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg"
-      onSubmit={handleFormSubmit}
-    >
+    <div className="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg">
       <input
         type="text"
         id="foodItem"
@@ -28,14 +23,21 @@ export default function FoodListItemInput({ onAddItemToList }: Props) {
         onChange={(e) => setFoodItem(e.target.value)}
         placeholder="Enter item"
         autoFocus
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleInputSubmit();
+          }
+        }}
       />
       <button
         className="flex aspect-square h-8 w-8 items-center justify-center rounded-lg text-white outline-0 ring-0 hover:bg-white/25 focus-visible:bg-white/25"
         disabled={!foodItem.trim()}
-        type="submit"
+        type="button"
+        onClick={handleInputSubmit}
       >
         +
       </button>
-    </form>
+    </div>
   );
 }

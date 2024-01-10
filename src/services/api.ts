@@ -1,5 +1,9 @@
-import { RecipeDetails, RecipeStats } from "@/types/Recipe";
-import { insertRecipes } from "./db";
+"use server";
+
+import { RecipeDetails } from "@/types/Recipe";
+import { insertRecipe } from "./db";
+import { redirect } from "next/navigation";
+import { Redirect } from "next";
 
 export const getRecipe = async (
   title: string,
@@ -29,46 +33,26 @@ export const getRecipe = async (
   }
 };
 
-export const fetchRecipes = async (
-  foodItems: string[],
-  difficulty?: string,
-  portions?: string
-): Promise<RecipeStats[]> => {
-  try {
-    const foodItemsQueryParam = encodeURIComponent(foodItems.join(","));
+export const createRecipe = async (foodItems: string[]): Promise<Redirect> => {
+  const foodItemsQueryParam = encodeURIComponent(foodItems.join(","));
 
-    let queryString = `?items=${foodItemsQueryParam}`;
-
-    if (difficulty) {
-      queryString += `&difficulty=${difficulty}`;
+  const res = await fetch(
+    `${process.env.URL}/api/create-recipe?items=${foodItemsQueryParam}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     }
+  );
 
-    if (portions) {
-      queryString += `&portions=${portions}`;
-    }
-
-    const res = await fetch(
-      `${process.env.URL}/api/recommend-recipe${queryString}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
-
-    const data = await res.json();
-    const recipes = data.recipes;
-
-    await insertRecipes(recipes);
-
-    return recipes;
-  } catch (error) {
-    console.error("Error fetching recipes:", error);
-    throw new Error("Failed to fetch recipes");
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
   }
+
+  const recipeTitle = await res.json();
+
+  await insertRecipe(recipeTitle);
+
+  redirect(`/recipe/${encodeURIComponent(recipeTitle)}`);
 };

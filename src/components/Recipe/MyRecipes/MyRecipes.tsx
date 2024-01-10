@@ -2,7 +2,6 @@
 
 import { getRecipeStatsFromKey } from "@/services/recipe";
 import { RecipeStats } from "@/types/Recipe";
-import RecipeStatsCard from "../Cards/Stats/RecipeStatsCard";
 import Link from "next/link";
 
 export default function MyRecipes() {
@@ -36,9 +35,7 @@ export default function MyRecipes() {
       ) : (
         <ul>
           {recipes.map((recipe) => (
-            <li key={recipe.title}>
-              <RecipeStatsCard recipeStats={recipe} showLink={true} />
-            </li>
+            <li key={recipe.title}>{recipe.title}</li>
           ))}
         </ul>
       )}

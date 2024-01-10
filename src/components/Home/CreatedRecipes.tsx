@@ -1,4 +1,3 @@
-import RecipeStatsCard from "../Recipe/Cards/Stats/RecipeStatsCard";
 import { getRecipes } from "@/services/db";
 
 export default async function CreatedRecipes() {
@@ -14,7 +13,7 @@ export default async function CreatedRecipes() {
       <div className="grid grid-cols-2 gap-3">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="col">
-            <RecipeStatsCard recipeStats={recipe} showLink={true} />
+            {recipe.title}
           </div>
         ))}
       </div>
