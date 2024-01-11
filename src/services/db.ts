@@ -5,22 +5,27 @@ import { db } from "@vercel/postgres";
 
 export async function insertRecipe(recipeTitle: string, uuid: string) {
   const client = await db.connect();
+  let directToUuid = uuid;
 
   try {
-    const existingRecipe = await client.query(
-      "SELECT 1 FROM recipes WHERE title = $1",
+    const existingRecipeUuid = await client.query(
+      "SELECT uuid FROM recipes WHERE title = $1 LIMIT 1",
       [recipeTitle]
     );
 
-    if (existingRecipe.rows.length === 0) {
+    if (existingRecipeUuid.rows.length === 0) {
       await client.query("INSERT INTO recipes (title, uuid) VALUES ($1, $2)", [
         recipeTitle,
         uuid,
       ]);
+    } else {
+      directToUuid = existingRecipeUuid.rows[0].uuid;
     }
   } finally {
     client.release();
   }
+
+  return directToUuid;
 }
 
 export async function getRecipes(pageSize: number, pageNumber: number) {

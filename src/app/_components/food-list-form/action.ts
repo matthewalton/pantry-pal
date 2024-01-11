@@ -18,31 +18,26 @@ export async function createRecipe(
 
   const foodListQueryParam = JSON.parse(foodList).join(",");
 
-  const id = uuidv4();
+  let id = uuidv4();
 
-  try {
-    const res = await fetch(
-      `${process.env.URL}/api/create-recipe?items=${encodeURIComponent(
-        foodListQueryParam
-      )}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!res.ok) {
-      return { message: "Connection error, failed to create recipe." };
+  const res = await fetch(
+    `${process.env.URL}/api/create-recipe?items=${encodeURIComponent(
+      foodListQueryParam
+    )}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     }
+  );
 
-    const data = await res.json();
-    await insertRecipe(data, id);
-  } catch (error) {
-    console.error(error);
-    return { message: "Connection error, please refresh the page." };
+  if (!res.ok) {
+    return { message: "Connection error, failed to create recipe." };
   }
+
+  const data = await res.json();
+  id = await insertRecipe(data, id);
 
   redirect(`/recipe/${id}`);
 }
