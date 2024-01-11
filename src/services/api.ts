@@ -1,17 +1,20 @@
 "use server";
 
 import { RecipeDetails } from "@/types/Recipe";
+import { getRecipe } from "./db";
 
-export const getRecipe = async (
-  title: string,
+export const getRecipeDetails = async (
+  uuid: string,
   difficulty: string,
   portions: string
 ): Promise<RecipeDetails> => {
   try {
-    const encodedTitle = encodeURIComponent(title);
+    const { title } = await getRecipe(uuid);
 
     const res = await fetch(
-      `${process.env.URL}/api/recipe/${encodedTitle}?difficulty=${difficulty}&portions=${portions}`,
+      `${process.env.URL}/api/recipe/${encodeURIComponent(
+        title
+      )}?difficulty=${difficulty}&portions=${portions}`,
       {
         method: "GET",
       }

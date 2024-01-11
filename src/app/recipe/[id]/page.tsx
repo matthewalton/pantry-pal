@@ -9,26 +9,16 @@ export default async function Page({ params }: { params: { id: string } }) {
   const data = await getRecipe(params.id);
   if (!data) redirect("/");
 
-  const recipeStats = {
-    uuid: params.id,
-    id: 0,
-    title: data.title,
-    difficulty: 0,
-    portions: 0,
-    prepTime: 0,
-    cookTime: 0,
-  };
-
   return (
     <div className="flex items-stretch flex-col gap-5 w-full max-w-xl mx-auto">
       <div className="flex flex-wrap gap-3">
-        <SaveRecipeButton recipeStats={recipeStats} />
+        {/* <SaveRecipeButton recipeStats={recipeStats} /> */}
       </div>
 
       <h3 className="text-2xl font-semibold">{data.title}</h3>
 
       <Suspense fallback={<RecipeDetailsCardLoadingSkeleton />}>
-        <RecipeDetails recipeStats={recipeStats} />
+        <RecipeDetails uuid={params.id} difficulty={6} portions={1} />
       </Suspense>
     </div>
   );

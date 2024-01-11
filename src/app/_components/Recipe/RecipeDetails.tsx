@@ -1,15 +1,20 @@
-import { getRecipe } from "@/services/api";
-import { RecipeStats } from "@/types/Recipe";
+import { getRecipeDetails } from "@/services/api";
 
 type Props = {
-  recipeStats: RecipeStats;
+  uuid: string;
+  difficulty: number;
+  portions: number;
 };
 
-export default async function RecipeDetails({ recipeStats }: Props) {
-  const { ingredients, instructions } = await getRecipe(
-    recipeStats.title,
-    recipeStats.difficulty.toString(),
-    recipeStats.portions.toString()
+export default async function RecipeDetails({
+  uuid,
+  difficulty,
+  portions,
+}: Props) {
+  const { ingredients, instructions } = await getRecipeDetails(
+    uuid,
+    difficulty.toString(),
+    portions.toString()
   );
 
   return (
