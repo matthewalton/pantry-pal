@@ -1,4 +1,4 @@
-import RecipeParams from "@/app/_components/recipe-params-form";
+import RecipeParamsForm from "@/app/_components/recipe-params-form";
 import RecipeSteps from "@/app/_components/recipe-steps";
 import { getRecipe } from "@/services/db";
 import { redirect } from "next/navigation";
@@ -19,7 +19,7 @@ export default async function Page({
     <div className="flex items-stretch flex-col gap-5 w-full max-w-xl mx-auto">
       <h3 className="text-2xl font-semibold">{data.title}</h3>
 
-      <RecipeParams difficulty={difficulty} portions={portions} />
+      <RecipeParamsForm difficulty={difficulty} portions={portions} />
 
       <RecipeSteps
         uuid={params.id}

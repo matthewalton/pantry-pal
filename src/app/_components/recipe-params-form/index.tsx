@@ -6,7 +6,7 @@ type Props = {
   portions: string;
 };
 
-export default function RecipeParams({ difficulty, portions }: Props) {
+export default function RecipeParamsForm({ difficulty, portions }: Props) {
   return (
     <form className="flex flex-col gap-2">
       <div className="flex gap-2">
