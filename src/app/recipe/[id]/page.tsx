@@ -1,3 +1,4 @@
+import RecipeParamsEdit from "@/app/_components/recipe-params-edit";
 import RecipeParamsForm from "@/app/_components/recipe-params-form";
 import RecipeSteps from "@/app/_components/recipe-steps";
 import { getRecipe } from "@/services/db";
@@ -19,7 +20,9 @@ export default async function Page({
     <div className="flex items-stretch flex-col gap-5 w-full max-w-xl mx-auto">
       <h3 className="text-2xl font-semibold">{data.title}</h3>
 
-      <RecipeParamsForm difficulty={difficulty} portions={portions} />
+      <RecipeParamsEdit difficulty={difficulty} portions={portions}>
+        <RecipeParamsForm difficulty={difficulty} portions={portions} />
+      </RecipeParamsEdit>
 
       <RecipeSteps
         uuid={params.id}
