@@ -1,8 +1,10 @@
 import RecipeParamsEdit from "@/app/_components/recipe-params-edit";
 import RecipeParamsForm from "@/app/_components/recipe-params-form";
 import RecipeSteps from "@/app/_components/recipe-steps";
+import RecipeStepsLoading from "@/app/_components/recipe-steps/loading";
 import { getRecipe } from "@/services/db";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 export default async function Page({
   params,
@@ -24,13 +26,15 @@ export default async function Page({
         <RecipeParamsForm difficulty={difficulty} portions={portions} />
       </RecipeParamsEdit>
 
-      <RecipeSteps
-        uuid={params.id}
-        params={{
-          difficulty: difficulty,
-          portions: portions,
-        }}
-      />
+      <Suspense fallback={<RecipeStepsLoading />}>
+        <RecipeSteps
+          uuid={params.id}
+          params={{
+            difficulty: difficulty,
+            portions: portions,
+          }}
+        />
+      </Suspense>
     </div>
   );
 }
