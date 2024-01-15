@@ -26,15 +26,13 @@ export default async function Page({
         <RecipeParamsForm difficulty={difficulty} portions={portions} />
       </RecipeParamsEdit>
 
-      <Suspense fallback={<RecipeStepsLoading />}>
-        <RecipeSteps
-          uuid={params.id}
-          params={{
-            difficulty: difficulty,
-            portions: portions,
-          }}
-        />
-      </Suspense>
+      <RecipeSteps
+        uuid={params.id}
+        params={{
+          difficulty: difficulty,
+          portions: portions,
+        }}
+      />
     </div>
   );
 }
