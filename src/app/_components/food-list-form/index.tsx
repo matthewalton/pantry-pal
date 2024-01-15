@@ -5,13 +5,15 @@ import { useSession } from "next-auth/react";
 import { useSignInPanel } from "../Providers";
 import FoodListInput from "../food-list-input";
 import { createRecipe } from "./action";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+import FoodListFormSubmitButton from "./submit-button";
 
 export default function FoodListForm() {
   const [formState, formAction] = useFormState(createRecipe, { message: "" });
   const [foodList, setFoodList] = useState<string[]>([]);
   const { data: session } = useSession();
   const { openPanel } = useSignInPanel();
+  const { pending } = useFormStatus();
 
   const handleAuthCheck = (event: React.ChangeEvent<HTMLFormElement>) => {
     if (!session) {
@@ -81,14 +83,7 @@ export default function FoodListForm() {
 
       <input type="hidden" name="foodList" value={JSON.stringify(foodList)} />
 
-      <button
-        className="transition-all rounded border enabled:bg-white enabled:text-black disabled:bg-gray-100 disabled:text-gray-500 enabled:hover:bg-gray-50 px-6 py-2 font-medium"
-        disabled={foodList.length === 0}
-        aria-label="Find Recipe"
-        type="submit"
-      >
-        Create Recipe
-      </button>
+      <FoodListFormSubmitButton listHasItems={foodList.length === 0} />
     </form>
   );
 }

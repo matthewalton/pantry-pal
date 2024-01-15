@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
 
 type Props = {
   onAddItemToList: (item: string) => void;
@@ -6,6 +7,7 @@ type Props = {
 
 export default function FoodListInput({ onAddItemToList }: Props) {
   const [foodItem, setFoodItem] = useState("");
+  const { pending } = useFormStatus();
 
   const handleInputSubmit = () => {
     onAddItemToList(foodItem);
@@ -23,6 +25,7 @@ export default function FoodListInput({ onAddItemToList }: Props) {
         onChange={(e) => setFoodItem(e.target.value)}
         placeholder="Enter item"
         autoFocus
+        disabled={pending}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
