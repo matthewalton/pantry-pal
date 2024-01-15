@@ -32,8 +32,16 @@ export default function RecipeParamsEdit({
 
   return (
     <div className="flex flex-col gap-1">
-      {difficulty && <div>Difficulty: {difficulty}/10</div>}
-      {portions && <div>Portions: {portions}</div>}
+      {difficulty && (
+        <div>
+          <span className="font-medium">Difficulty:</span> {difficulty}/10
+        </div>
+      )}
+      {portions && (
+        <div>
+          <span className="font-medium">Portions:</span> {portions}
+        </div>
+      )}
 
       <button
         type="button"

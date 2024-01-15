@@ -13,7 +13,7 @@ export default function DifficultyInput({ difficulty }: Props) {
       </label>
       <div className="relative mt-1 rounded-md shadow-sm">
         <input
-          type="text"
+          type="number"
           name="difficulty"
           defaultValue={difficulty}
           min={1}

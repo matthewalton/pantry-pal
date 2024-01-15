@@ -13,7 +13,7 @@ export default function PortionsInput({ portions }: Props) {
       </label>
       <div className="relative mt-1 rounded-md shadow-sm">
         <input
-          type="text"
+          type="number"
           name="portions"
           defaultValue={portions}
           min={1}
