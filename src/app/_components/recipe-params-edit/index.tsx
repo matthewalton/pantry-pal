@@ -20,6 +20,7 @@ export default function RecipeParamsEdit({
       <div className="flex flex-col gap-2">
         {children}
         <button
+          type="button"
           className={`transition-colors text-gray-800 font-medium py-1 px-4 rounded bg-gray-100 hover:bg-gray-200 border`}
           onClick={() => setEditing(false)}
         >
@@ -30,13 +31,12 @@ export default function RecipeParamsEdit({
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex gap-2">
-        <div>Difficulty: {difficulty}/10</div>
-        <div>Portions: {portions}</div>
-      </div>
+    <div className="flex flex-col gap-1">
+      {difficulty && <div>Difficulty: {difficulty}/10</div>}
+      {portions && <div>Portions: {portions}</div>}
 
       <button
+        type="button"
         className={`transition-colors text-black font-medium py-1 px-4 rounded hover:bg-gray-100 border`}
         onClick={() => setEditing(true)}
       >
