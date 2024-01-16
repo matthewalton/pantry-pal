@@ -2,7 +2,7 @@ import Image from "next/image";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { JWT } from "next-auth/jwt";
-import MyRecipes from "@/app/_components/recipe/MyRecipes";
+import MyRecipes from "@/app/_components/my-recipes";
 import { Suspense } from "react";
 
 export default function Page() {
