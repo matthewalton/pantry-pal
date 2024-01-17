@@ -1,4 +1,4 @@
-import FoodListForm from "@/app/_components/food-list-form";
+import FoodListForm from "@/app/_components/food-list/food-list-form";
 import CreatedRecipes from "./_components/recipe/created-recipes";
 
 export default function Home() {
