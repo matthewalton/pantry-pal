@@ -1,7 +1,7 @@
-import RecipeParamsEdit from "@/app/_components/recipe-params-edit";
-import RecipeParamsForm from "@/app/_components/recipe-params-form";
-import RecipeSteps from "@/app/_components/recipe-steps";
-import RecipeStepsLoading from "@/app/_components/recipe-steps/loading";
+import RecipeParamsEdit from "@/app/_components/recipe/recipe-params-edit";
+import RecipeParamsForm from "@/app/_components/recipe/recipe-params-form";
+import RecipeSteps from "@/app/_components/recipe/recipe-steps";
+import RecipeStepsLoading from "@/app/_components/recipe/recipe-steps/loading";
 import { getRecipe } from "@/services/db";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
