@@ -1,20 +1,13 @@
 import Image from "next/image";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { JWT } from "next-auth/jwt";
 import MyRecipes from "@/app/_components/recipe/my-recipes";
 import { Suspense } from "react";
+import { getServerSession } from "next-auth";
 
-export default function Page() {
-  const token = headers().get("x-session-token");
+export default async function Page() {
+  const session = await getServerSession();
 
-  if (!token) {
-    redirect("/");
-  }
-
-  const user = JSON.parse(token) as JWT;
-
-  if (!user) {
+  if (!session) {
     redirect("/");
   }
 
@@ -22,9 +15,9 @@ export default function Page() {
     <div className="flex flex-col flex-wrap gap-5 items-stretch w-full max-w-lg">
       <h1 className="font-bold text-xl">Profile</h1>
       <div className="flex flex-wrap gap-5">
-        {user.picture && (
+        {session.user?.image && (
           <Image
-            src={user.picture}
+            src={session.user.image}
             className="shadow-lg"
             alt="User profile picture"
             width={100}
@@ -33,8 +26,8 @@ export default function Page() {
         )}
 
         <div className="flex flex-col gap-1">
-          <h2 className="font-bold text-lg">{user.name}</h2>
-          <span>{user.email}</span>
+          <h2 className="font-bold text-lg">{session.user?.name}</h2>
+          <span>{session.user?.email}</span>
         </div>
       </div>
 

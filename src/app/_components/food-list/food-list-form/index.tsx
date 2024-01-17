@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useSignInPanel } from "../../Providers";
 import FoodListInput from "../food-list-input";
 import { createRecipe } from "./action";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import FoodListFormSubmitButton from "./submit-button";
 import FoodListItemList from "../food-list-item-list";
 
@@ -14,7 +14,6 @@ export default function FoodListForm() {
   const [foodList, setFoodList] = useState<string[]>([]);
   const { data: session } = useSession();
   const { openPanel } = useSignInPanel();
-  const { pending } = useFormStatus();
 
   const handleAuthCheck = (event: React.ChangeEvent<HTMLFormElement>) => {
     if (!session) {
