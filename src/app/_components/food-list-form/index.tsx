@@ -7,6 +7,7 @@ import FoodListInput from "../food-list-input";
 import { createRecipe } from "./action";
 import { useFormState, useFormStatus } from "react-dom";
 import FoodListFormSubmitButton from "./submit-button";
+import FoodListItemList from "../food-list-item-list";
 
 export default function FoodListForm() {
   const [formState, formAction] = useFormState(createRecipe, { message: "" });
@@ -59,27 +60,10 @@ export default function FoodListForm() {
         </span>
       )}
 
-      <ul className="px-1">
-        {foodList.map((item, index) => {
-          return (
-            <li
-              key={item}
-              className="flex items-center justify-between gap-2 font-mono ease-in-out animate-in fade-in slide-in-from-bottom-4"
-            >
-              <span>{item}</span>
-              <span
-                role="button"
-                className="text-xl text-red-500"
-                onClick={() => handleRemoveItemClick(index)}
-                aria-label="Remove Food Item"
-                data-testid={`remove-item-${index}`}
-              >
-                &times;
-              </span>
-            </li>
-          );
-        })}
-      </ul>
+      <FoodListItemList
+        foodList={foodList}
+        onRemoveItemClick={handleRemoveItemClick}
+      />
 
       <input type="hidden" name="foodList" value={JSON.stringify(foodList)} />
 
