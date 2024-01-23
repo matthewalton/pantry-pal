@@ -24,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <Header />
 
-          <main className="mx-auto flex max-w-3xl flex-col grow items-stretch justify-center px-4 sm:px-6">
+          <main className="mx-auto flex min-w-full max-w-3xl grow flex-col items-center justify-center px-4 sm:px-6">
             {children}
           </main>
 

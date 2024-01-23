@@ -1,10 +1,8 @@
 import RecipeParamsEdit from "@/app/_components/recipe/recipe-params-edit";
 import RecipeParamsForm from "@/app/_components/recipe/recipe-params-form";
 import RecipeSteps from "@/app/_components/recipe/recipe-steps";
-import RecipeStepsLoading from "@/app/_components/recipe/recipe-steps/loading";
 import { getRecipe } from "@/services/db";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 export default async function Page({
   params,
@@ -19,7 +17,7 @@ export default async function Page({
   const { difficulty, portions } = searchParams;
 
   return (
-    <div className="flex items-stretch flex-col gap-5 w-full max-w-xl mx-auto">
+    <div className="mx-auto flex w-full max-w-xl flex-col items-stretch gap-5">
       <h3 className="text-2xl font-semibold">{data.title}</h3>
 
       <RecipeParamsEdit difficulty={difficulty} portions={portions}>

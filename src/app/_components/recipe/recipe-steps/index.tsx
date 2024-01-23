@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function RecipeSteps({ uuid, params }: Props) {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [instructions, setInstructions] = useState<string[]>([]);
 
@@ -21,11 +21,11 @@ export default function RecipeSteps({ uuid, params }: Props) {
       const { ingredients, instructions } = await getRecipeDetails(
         uuid,
         params.difficulty,
-        params.portions
+        params.portions,
       );
+
       setIngredients(ingredients);
       setInstructions(instructions);
-
       setLoading(false);
     }
 
@@ -44,7 +44,7 @@ export default function RecipeSteps({ uuid, params }: Props) {
         ))}
       </ul>
 
-      <ol className="list-decimal list-inside">
+      <ol className="list-inside list-decimal">
         {instructions.map((instruction) => (
           <li key={instruction}>{instruction}</li>
         ))}
